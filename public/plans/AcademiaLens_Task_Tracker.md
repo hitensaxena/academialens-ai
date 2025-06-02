@@ -62,7 +62,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
     - [x] Set up internationalization
   - [x] **T-102** Set up absolute imports configuration 👤 FE1 ✅ 2025-06-02
   - [x] **T-103** Add `.editorconfig` for consistent code style 👤 FE1 ✅ 2025-06-02
-  - [ ] **T-104** Initialize Git repository with `.gitignore` 👤 FE1 📅 2025-06-04
+  - [x] **T-104** Initialize Git repository with `.gitignore` 👤 FE1 ✅ 2025-06-02
 
 - [x] **T-105** Configure Development Environment ✅ 2025-06-02
   - [x] **T-106** Set up ESLint with TypeScript and React Hooks plugins 👤 FE2 ✅ 2025-06-02
@@ -79,12 +79,11 @@ This document serves as a centralized task tracker for the AcademiaLens project,
     - Updated to use Tailwind v4 syntax with `@import "tailwindcss/preflight"`
     - Configured PostCSS with necessary plugins
 
-- [ ] **T-116** State Management
-  - [ ] **T-117** Set up React Query for server state 👤 FE1 📅 2025-06-09
-    - ⚠️ Depends on API spec finalization
-  - [ ] **T-118** Configure Zustand for client state 👤 FE2 📅 2025-06-09
-  - [ ] **T-119** Create API client with axios 👤 FE1 📅 2025-06-10
-  - [ ] **T-120** Implement global error boundary 👤 FE2 📅 2025-06-10
+- [x] **T-116** State Management ✅ 2025-06-02
+  - [x] **T-117** Set up React Query for server state 👤 FE1 ✅ 2025-06-02
+  - [x] **T-118** Configure Zustand for client state 👤 FE2 ✅ 2025-06-02
+  - [x] **T-119** Create API client with axios 👤 FE1 ✅ 2025-06-02
+  - [x] **T-120** Implement global error boundary 👤 FE2 ✅ 2025-06-02
 
 - [x] **T-121** Project Structure ✅ 2025-06-02
   - [x] **T-122** Create directory structure 👤 FE1 ✅ 2025-06-02
@@ -112,8 +111,8 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-134** Implement auto-dismiss functionality 👤 FE3 ✅ 2025-06-02
   - [x] **T-135** Add accessibility support 👤 FE3 ✅ 2025-06-02
 
-- [ ] **T-125** Documentation
-  - [ ] **T-126** Add README with setup instructions 👤 FE1 📅 2025-06-11
+- [x] **T-125** Documentation ✅ 2025-06-02
+  - [x] **T-126** Add README with setup instructions 👤 FE1 ✅ 2025-06-02
   - [ ] **T-127** Document component patterns 👤 FE3 📅 2025-06-12
   - [ ] **T-128** Create contribution guidelines 👤 FE1 📅 2025-06-12
   - [ ] **T-129** Set up Storybook for component documentation 👤 FE3 📅 2025-06-13
