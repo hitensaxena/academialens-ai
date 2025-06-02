@@ -1,0 +1,84 @@
+keepEmptyPriority: false
+code:
+  include_lists:
+    - TODO
+    - DOING
+    - DONE
+    - PLANNING
+    - FIXME
+    - ARCHIVE
+    - HACK
+    - CHANGED
+    - XXX
+    - IDEA
+    - NOTE
+    - REVIEW
+lists:
+  - name: NOTE
+    hidden: false
+    id: 1ehz2qumbfezbzp
+  - name: Past Due Reminders
+    hidden: true
+    ignore: false
+    filter: 'remind = /./ and remind < "${now}" and list != DONE -remind'
+    id: 1ehz2qumbfezbzq
+  - name: What's Due?
+    hidden: true
+    ignore: false
+    filter: 'dueDate < "${in 15 days}" AND list != DONE +dueDate +order'
+    id: 1ehz2qumbfezbzr
+  - name: TODO
+    hidden: false
+    id: 1ehz2qumbfezbzs
+  - name: DOING
+    hidden: false
+    id: 1ehz2qumbfezbzt
+  - name: DONE
+    hidden: false
+    ignore: true
+    id: 1ehz2qumbfezbzu
+  - name: Recently Completed
+    filter: 'completedDate > "${14 days ago}" -completed'
+    hidden: false
+    id: 1ehz2qumbfezbzv
+  - name: FIXME
+    hidden: false
+    ignore: false
+    id: 1ehz2qumbff0utn
+settings:
+  '0': object Object
+  openIn: default
+  openCodeIn: default
+  journalType: New File
+  journalPath: backlog
+  appendNewCardsTo: null
+  newCardSyntax: HASHTAG
+  replaceSpacesWith: '-'
+  plugins: {}
+  journalTemplate: null
+  markdownOnly: false
+  kudosProbability: 0.33
+  views: []
+  name: academialens-ai
+  cards:
+    colors: []
+    template: '${template_simple}'
+    trackChanges: false
+    metaNewLine: true
+    addCompletedMeta: true
+    addCheckBoxTasks: false
+    doingList: DOING
+    doneList: DONE
+    tokenPrefix: '#'
+    taskPrefix: '##'
+    tagPrefix: '#'
+    metaSep: ':'
+    orderMeta: true
+    maxLines: 2
+    addNewCardsToTop: true
+    showTagsAndMeta: false
+    addStartedMeta: true
+    defaultList: TODO
+    computed: !<tag:yaml.org,2002:js/undefined> ''
+    archiveCompleted: true
+    archiveFolder: backlog/archive

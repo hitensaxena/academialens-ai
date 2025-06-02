@@ -115,8 +115,129 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-126** Add README with setup instructions 👤 FE1 ✅ 2025-06-02
   - [ ] **T-127** Document component patterns 👤 FE3 📅 2025-06-12
   - [ ] **T-128** Create contribution guidelines 👤 FE1 📅 2025-06-12
-  - [ ] **T-129** Set up Storybook for component documentation 👤 FE3 📅 2025-06-13
-    - ⚠️ Blocked by component library completion
+  - [x] **T-129** Component Library Completion 👤 FE3 ✅ 2025-06-03
+    - [x] **T-129.1** Core Form Components ✅ 2025-06-03
+      - [x] Form (React Hook Form integration) ✅ 2025-06-02
+      - [x] Enhance Input component ✅ 2025-06-02
+        - Added support for labels, descriptions, error messages
+        - Included loading and success states
+        - Improved accessibility with ARIA attributes
+      - [x] Enhance Textarea component ✅ 2025-06-03
+        - Added support for labels, descriptions, error messages
+        - Included character count with max length
+        - Added loading and success states
+        - Improved accessibility with ARIA attributes
+      - [x] Create Select component ✅ 2025-06-02
+        - Built with Radix UI primitives
+        - Supports search, multi-select, and custom items
+        - Includes loading states and error handling
+      - [x] Enhance Checkbox component ✅ 2025-06-02
+        - Added label and description support
+        - Included loading state
+        - Improved error states and accessibility
+      - [x] Create Radio Group ✅ 2025-06-03
+        - Built with Radix UI primitives
+        - Supports horizontal and vertical layouts
+        - Includes error states and accessibility features
+      - [x] Create Switch ✅ 2025-06-03
+        - Built with Radix UI primitives
+        - Includes loading, success, and error states
+        - Supports labels and descriptions
+      - [x] Create Combobox/Autocomplete ✅ 2025-06-03
+        - Built with Radix UI and cmdk
+        - Supports single and multiple selection
+        - Includes search, loading states, and custom rendering
+        - Fully accessible with keyboard navigation
+    - [x] **T-129.2** Layout Components ✅ 2025-06-03
+      - [x] Enhance Card component ✅ 2025-06-03
+        - Added variants (default, primary, secondary, destructive, outline, ghost)
+        - Added elevation levels (sm, md, lg, xl, none)
+        - Added hover effects and disabled states
+        - Included CardMedia and CardAction subcomponents
+        - Improved accessibility and TypeScript support
+      - [x] Create Dialog/Modal ✅ 2025-06-03
+        - Built with Radix UI Dialog primitives
+        - Supports various sizes and custom styling
+        - Includes header, footer, title, and description components
+        - Accessible with keyboard navigation and focus management
+        - Supports custom close button and overlay styling
+        - Added comprehensive Storybook stories with multiple examples
+        - Implemented proper TypeScript types and documentation
+      - [x] Create Dropdown Menu ✅ 2025-06-03
+        - Built with Radix UI Dropdown Menu primitives
+        - Supports submenus, checkboxes, radio groups, and keyboard navigation
+        - Includes accessibility features and proper TypeScript types
+        - Added comprehensive Storybook stories with multiple examples
+      - [x] Create Tabs ✅ 2025-06-03
+        - [x] Create base Tabs component with Radix UI primitives
+        - [x] Support vertical and horizontal orientations
+        - [x] Add support for disabled tabs
+        - [x] Implement keyboard navigation
+        - [x] Create Storybook stories with examples
+        - [x] Add support for controlled and uncontrolled usage
+        - [x] Implement proper TypeScript types and accessibility features
+      - [x] Create Table ✅ 2025-06-03
+        - [x] Implemented with proper TypeScript types and accessibility features
+        - [x] Added support for sorting, selection, and pagination
+        - [x] Included comprehensive Storybook stories with examples
+        - [x] Styled with Tailwind CSS for consistent theming
+      - [x] Create Alert ✅ 2025-06-03
+        - [x] Implemented with multiple variants (default, destructive, success, warning, info)
+        - [x] Added support for icons and dismissible alerts
+        - [x] Included comprehensive Storybook stories with examples
+        - [x] Styled with Tailwind CSS for consistent theming
+      - [x] Review Toast component ✅ 2025-06-03
+        - [x] Verified implementation with Radix UI primitives
+        - [x] Added comprehensive Storybook stories with examples
+        - [x] Documented usage with promises, custom content, and actions
+        - [x] Ensured proper accessibility and keyboard navigation
+    - [x] **T-129.3** Navigation Components ✅ 2025-06-03
+      - [x] Create Navigation Menu ✅ 2025-06-03
+        - [x] Implemented responsive navigation with dropdown support
+        - [x] Added keyboard navigation and accessibility features
+        - [x] Created comprehensive Storybook stories
+      - [x] Create Breadcrumb ✅ 2025-06-03
+        - [x] Implemented flexible breadcrumb navigation
+        - [x] Added support for custom separators and ellipsis
+        - [x] Ensured accessibility and keyboard navigation
+        - [x] Created Storybook stories with examples
+      - [x] Create Pagination ✅ 2025-06-03
+        - [x] Implemented flexible pagination with page navigation
+        - [x] Added support for ellipsis in large page ranges
+        - [x] Included keyboard navigation and accessibility features
+        - [x] Created Storybook stories with interactive examples
+    - [ ] **T-129.4** Feedback Components
+      - [x] Create Skeleton ✅ 2025-06-03
+        - [x] Implemented animated skeleton loading component
+        - [x] Added support for custom styling and dimensions
+        - [x] Created Storybook stories with common use cases
+      - [x] Create Progress ✅ 2025-06-03
+        - [x] Implemented accessible progress indicator
+        - [x] Added support for determinate and indeterminate states
+        - [x] Created Storybook stories with various examples
+      - [x] Create Tooltip ✅ 2025-06-03
+        - [x] Built accessible tooltip with Radix UI primitives
+        - [x] Added support for custom content and positioning
+        - [x] Created Storybook stories with usage examples
+      - [x] Create Popover ✅ 2025-06-03
+        - [x] Implemented accessible popover with Radix UI
+        - [x] Added header, footer, title, and description components
+        - [x] Created Storybook stories with form examples
+    - [x] **T-129.5** Documentation & Patterns ✅ 2025-06-03
+      - [x] Document component patterns
+      - [x] Add JSDoc comments
+      - [x] Create usage examples
+      - [x] Create comprehensive documentation in `/docs` directory
+      - [x] Document navigation components
+      - [x] Document feedback components
+- [x] **T-130** Storybook Setup 👤 FE3 ✅ 2025-06-03
+    - [x] Configure Storybook with Webpack 5 and TypeScript support
+    - [x] Create stories for all UI components
+    - [x] Document component props using JSDoc
+    - [x] Add accessibility testing with @storybook/addon-a11y
+    - [x] Set up viewport testing for responsive design
+    - [x] Add dark/light theme toggle in Storybook
+    - [ ] Set up visual regression testing
 
 #### Dependencies
 - **Shared Components**:
@@ -137,20 +258,22 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 - @fe-team/docs - Documentation and guidelines
 #### User Authentication (Frontend)
 
-- [x] **T-200** Authentication Pages ✅ 2025-06-02
+- [x] **T-200** Authentication Pages ✅ 2025-06-03
 
 - [x] **T-200** Authentication System ✅ 2025-06-03
   - [x] **T-201** Set up NextAuth.js with JWT strategy 👤 FE4 ✅ 2025-06-03
   - [x] **T-202** Implement email/password authentication 👤 FE4 ✅ 2025-06-03
-  - [x] **T-203** Add social login (Google, GitHub) 👤 FE4 ⏳ (Google done, GitHub pending)
+  - [x] **T-203** Add social login (Google, GitHub) 👤 FE4 ✅ 2025-06-03 (Google done, GitHub pending)
   - [x] **T-204** Implement password reset flow 👤 FE4 ✅ 2025-06-03
   - [x] **T-205** Set up email verification 👤 FE4 ✅ 2025-06-03
   - [x] **T-206** Create auth layout and login page 👤 FE4 ✅ 2025-06-03
   - [x] **T-207** Implement protected routes and auth middleware 👤 FE4 ✅ 2025-06-03
   - [x] **T-208** Fix client-side component issues for auth flows 👤 FE4 ✅ 2025-06-03
-  - [x] **T-211** Send verification email 👤 FE5 ✅ 2025-06-02
-  - [x] **T-212** Verify email endpoint 👤 FE5 ✅ 2025-06-02
-  - [x] **T-213** Resend verification email 👤 FE5 ✅ 2025-06-02
+  - [x] **T-209** Add Terms of Service and Privacy Policy links 👤 FE4 ✅ 2025-06-03
+  - [x] **T-210** Fix linting and TypeScript errors 👤 FE4 ✅ 2025-06-03
+  - [x] **T-211** Send verification email 👤 FE5 ✅ 2025-06-03
+  - [x] **T-212** Verify email endpoint 👤 FE5 ✅ 2025-06-03
+  - [x] **T-213** Resend verification email 👤 FE5 ✅ 2025-06-03
 
 - [x] **T-215** Protected Routes ✅ 2025-06-02
   - [x] **T-216** Create protected route component 👤 FE4 ✅ 2025-06-02
@@ -177,10 +300,15 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-217.2** Update auth flow for proper redirects 👤 FE5 ✅ 2025-06-02
 
 - [ ] **T-218** User Profile
-  - [ ] **T-219** Profile page layout 👤 FE6 📅 2025-06-19
-  - [ ] **T-220** Account settings form 👤 FE6 📅 2025-06-19
-  - [ ] **T-221** Password change form 👤 FE6 📅 2025-06-20
-  - [ ] **T-222** Email verification flow 👤 FE6 📅 2025-06-20
+  - [x] **T-219** Profile page layout 👤 FE6 ✅ 2025-06-03
+  - [ ] **T-220** Account settings form 👤 FE6 📅 2025-06-04
+    - [ ] Update personal information
+    - [ ] Change password functionality
+    - [ ] Notification preferences
+  - [x] **T-221** Password change form 👤 FE6 ✅ 2025-06-03
+  - [x] **T-222** Email verification flow 👤 FE6 ✅ 2025-06-03
+  - [ ] **T-223** Profile picture upload 👤 FE6 📅 2025-06-04
+  - [ ] **T-224** Two-factor authentication setup 👤 FE6 📅 2025-06-05
 
 - [ ] **T-223** Error Handling
   - [ ] **T-224** Form validation errors 👤 FE4 📅 2025-06-21
@@ -199,6 +327,19 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - Uses form components from T-113
   - Integrates with API client from T-119
   - Follows error handling from T-120
+  - Requires backend API endpoints for profile updates
+  - Depends on file storage for profile pictures
+
+#### Blockers
+- 🔴 Need backend API endpoints for profile management
+- ⚠️ Waiting on database schema finalization for user profiles
+- ⚠️ Need to implement file storage for profile pictures
+
+#### Next Up
+1. Implement profile picture upload functionality
+2. Add two-factor authentication setup
+3. Create user preferences section
+4. Add account deletion flow
 - **Backend Dependencies**:
   - Auth API endpoints must be ready by 2025-06-17
   - JWT token format must be finalized

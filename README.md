@@ -4,6 +4,14 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
 
 ## 🚀 Features
 
+### 🎨 Component Library & Documentation
+- 📚 Comprehensive UI component library built with Radix UI primitives
+- 🎭 Interactive documentation with [Storybook](http://localhost:6006)
+- ♿ Accessibility-first components with full keyboard navigation
+- 🌓 Built-in dark/light theme support
+- 📱 Fully responsive components
+- 🧪 Tested with React Testing Library
+
 ### 🔐 Authentication & Security
 - Secure user authentication with email/password
 - Password reset functionality
@@ -97,7 +105,10 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
    # In the root directory
    npm run dev
    
-   # In a new terminal, from the backend directory
+   # In a new terminal, run Storybook
+   npm run storybook
+   
+   # In another terminal, from the backend directory
    cd backend
    poetry run uvicorn app.main:app --reload
    ```
@@ -191,7 +202,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚀 Recent Updates (June 2025)
 
-### 2025-06-03: Authentication & User Management
+### 2025-06-03: Component Library & Storybook
+- 🎨 Implemented comprehensive UI component library with Radix UI
+- 📚 Set up Storybook for component documentation and testing
+- ♿ Enhanced accessibility across all components
+- 🎨 Added dark/light theme support
+- 📱 Ensured all components are fully responsive
+
+### 2025-06-02: Authentication & User Management
 - ✅ Implemented secure authentication system with NextAuth.js
 - 🔐 Added email/password and Google OAuth login
 - ✉️ Set up email verification and password reset flows
