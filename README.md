@@ -199,6 +199,51 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [shadcn/ui Documentation](https://ui.shadcn.com/docs)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 
+## 🚀 Recent Updates (June 2025)
+
+### 🛠 Fixed
+- Resolved 404 error on dashboard route by restructuring route groups
+- Improved authentication flow with proper redirects
+- Enhanced middleware for protected routes
+- Added comprehensive debug logging for auth state management
+- Fixed route guard implementation for authenticated routes
+
+## 🚧 Current Focus (Week 1 - June 2025)
+
+### In Progress
+- 🔄 **Authentication System**
+  - Email verification flow
+  - Protected routes implementation
+  - Session management
+- 🛠 **Core UI Components**
+  - Dashboard layout
+  - Document management interface
+  - Responsive navigation
+
+### Next Up
+- 🔜 **Document Management**
+  - File upload component
+  - Document listing and search
+  - AI analysis integration
+
+## 📅 Project Timeline
+
+### Phase 1: MVP - Core Features (June 2025)
+- [x] Project setup and authentication
+- [ ] Document management system
+- [ ] Basic AI analysis features
+- [ ] User dashboard
+
+### Phase 2: Enhanced Features (July 2025)
+- Advanced search capabilities
+- Collaboration tools
+- Enhanced AI insights
+
+### Phase 3: Polish & Scale (August 2025)
+- Performance optimization
+- User feedback implementation
+- Scaling infrastructure
+
 ## 🎯 Recent Improvements
 
 ### Authentication & UI

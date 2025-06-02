@@ -19,7 +19,7 @@ type AuthContextType = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
@@ -46,46 +46,89 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Check if user is authenticated
   const isAuthenticated = !!user;
 
-  // Initialize auth state on mount
+  // Initialize auth state on mount and on token changes
   useEffect(() => {
+    console.log('AuthProvider mounted, initializing auth state...');
+
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      return null;
+    };
+
     const initializeAuth = async () => {
       try {
         // Check for existing session
-        const token = localStorage.getItem('auth_token');
+        const token = getCookie('auth_token');
+        console.log('Auth init - Token in cookies:', token ? 'exists' : 'not found');
 
         if (token) {
-          // TODO: Verify token with backend
+          // In a real app, you would verify the token with the backend
           // For now, we'll just simulate a user
-          setUser({
+          const mockUser = {
             id: '1',
             name: 'Demo User',
             email: 'demo@example.com',
             emailVerified: true,
             role: 'user',
-          });
+          };
+
+          console.log('Auth init - Setting user:', mockUser);
+          setUser(mockUser);
+          return true;
+        } else {
+          console.log('Auth init - No token found, setting user to null');
+          setUser(null);
+          return false;
         }
       } catch (error) {
         console.error('Auth initialization error:', error);
         // Clear any invalid tokens
-        localStorage.removeItem('auth_token');
+        document.cookie = 'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        setUser(null);
+        return false;
       } finally {
+        console.log('Auth initialization complete, setting isLoading to false');
         setIsLoading(false);
       }
     };
 
-    initializeAuth();
+    // Initial auth check - don't await here to prevent blocking
+    initializeAuth().then((isAuthenticated) => {
+      console.log('Initial auth check complete, isAuthenticated:', isAuthenticated);
+
+      // If we have a token but still not authenticated, there might be an issue
+      if (getCookie('auth_token') && !isAuthenticated) {
+        console.log('Token exists but auth failed, clearing token...');
+        localStorage.removeItem('auth_token');
+      }
+    });
+
+    // Listen for storage events to sync auth state across tabs
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'auth_token' || e.key === null) {
+        console.log('auth_token changed in localStorage, reinitializing auth...');
+        initializeAuth();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   // Login function
-  const login = async (email: string, password: string, rememberMe = false) => {
+  const login = async (email: string, password: string) => {
     try {
+      console.log('Login started with email:', email);
       setIsLoading(true);
 
-      // TODO: Replace with actual API call
-      console.log('Login attempt with:', { email, rememberMe });
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate API call with a small delay
+      console.log('Simulating API call with password length:', password.length);
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Simulate successful login
       const mockUser = {
@@ -96,10 +139,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         role: 'user',
       };
 
-      // Store token in localStorage
-      localStorage.setItem('auth_token', 'mock-jwt-token');
+      // Store token in cookies
+      const authToken = `mock-jwt-token-${Date.now()}`;
+      console.log('Setting auth token in cookies');
+      document.cookie = `auth_token=${authToken}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`; // 1 week expiry
 
       // Update user state
+      console.log('Setting user state:', mockUser);
       setUser(mockUser);
 
       // Show success message
@@ -108,8 +154,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         description: `Welcome back, ${mockUser.name}!`,
       });
 
-      // Redirect to dashboard or previous page
-      router.push('/dashboard');
+      console.log('Login completed, returning user data');
+      return mockUser;
     } catch (error) {
       console.error('Login error:', error);
       throw new Error('Invalid email or password');
@@ -160,8 +206,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Clear auth state
-      localStorage.removeItem('auth_token');
+      console.log('Clearing auth cookies...');
+      document.cookie = 'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
       setUser(null);
+
+      // Force clear all auth-related state
+      window.dispatchEvent(new Event('storage'));
 
       // Show success message
       toast({

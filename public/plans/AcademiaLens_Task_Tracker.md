@@ -149,6 +149,23 @@ This document serves as a centralized task tracker for the AcademiaLens project,
     - [x] **T-207** Password strength meter 👤 FE4 ✅ 2025-06-02
     - [x] **T-208** Terms & conditions checkbox 👤 FE4 ✅ 2025-06-02
   - [x] **T-209** Password reset flow 👤 FE5 ✅ 2025-06-02
+
+- [x] **T-210** Email Verification Flow ✅ 2025-06-02
+  - [x] **T-211** Send verification email 👤 FE5 ✅ 2025-06-02
+  - [x] **T-212** Verify email endpoint 👤 FE5 ✅ 2025-06-02
+  - [x] **T-213** Resend verification email 👤 FE5 ✅ 2025-06-02
+
+- [x] **T-215** Protected Routes ✅ 2025-06-02
+  - [x] **T-216** Create protected route component 👤 FE4 ✅ 2025-06-02
+  - [x] **T-217** Implement route guards 👤 FE4 ✅ 2025-06-02
+  - [x] **T-218** Handle unauthorized access 👤 FE4 ✅ 2025-06-02
+  - [ ] **T-217** Implement route guards 👤 FE4 📅 2025-06-03
+  - [ ] **T-218** Handle unauthorized access 👤 FE4 📅 2025-06-03
+
+- [ ] **T-220** Session Management
+  - [ ] **T-221** Implement session refresh 👤 FE5 📅 2025-06-04
+  - [ ] **T-222** Handle token expiration 👤 FE5 📅 2025-06-04
+  - [ ] **T-223** Concurrent session management 👤 FE5 📅 2025-06-04
     - [x] **T-210** Request reset email form 👤 FE5 ✅ 2025-06-02
     - [x] **T-211** Reset password form 👤 FE5 ✅ 2025-06-02
 

@@ -5,17 +5,10 @@ const withBundleAnalyzerConfig = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
-
-  // Enable SWC minification
-  swcMinify: true,
-
-  // Enable ES modules
-  experimental: {
-    esmExternals: true,
-  },
 
   // Image optimization
   images: {
@@ -25,14 +18,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // Internationalization
-  i18n: {
-    locales: ['en', 'es', 'fr'],
-    defaultLocale: 'en',
-    localeDetection: true,
-  },
-
-  // Webpack configuration
+  // Webpack configuration with Turbopack support
   webpack: (config, { isServer }) => {
     // Add custom webpack configurations here
     if (!isServer) {
@@ -42,13 +28,17 @@ const nextConfig = {
         fs: false,
       };
     }
-
     return config;
   },
 
   // Environment variables
   env: {
     NEXT_PUBLIC_APP_ENV: process.env.NODE_ENV || 'development',
+  },
+
+  // Enable Turbopack
+  experimental: {
+    turbo: {},
   },
 };
 

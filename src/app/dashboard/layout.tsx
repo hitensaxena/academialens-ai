@@ -1,32 +1,76 @@
 'use client';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button/button';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Home, FileText, BookOpen, Settings, LogOut, Menu, X } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
-  { name: 'Documents', href: '/documents', icon: FileText },
-  { name: 'Research', href: '/research', icon: BookOpen },
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { name: 'Documents', href: '/dashboard/documents', icon: FileText },
+  { name: 'Research', href: '/dashboard/research', icon: BookOpen },
+  { name: 'Settings', href: '/dashboard/settings', icon: Settings },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
   const pathname = usePathname();
+  const { toast } = useToast();
+
+  // Debug effect to log auth state changes
+  useEffect(() => {
+    console.log('DashboardLayout - Auth state:', { isAuthenticated, isLoading, user });
+  }, [isAuthenticated, isLoading, user]);
+
+  // Show loading state while auth is being checked
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
+          <p className="text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authenticated, the ProtectedRoute should handle the redirect
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleLogout = async () => {
     try {
       await logout();
+      toast({
+        title: 'Logged out successfully',
+        description: 'You have been logged out.',
+      });
+      router.push('/login');
     } catch (error) {
-      console.error('Failed to log out', error);
+      console.error('Logout error:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to log out. Please try again.',
+        variant: 'destructive',
+      });
     }
+  };
+
+  const getUserInitials = () => {
+    if (!user) return 'U';
+    return user.name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
   };
 
   return (
@@ -37,7 +81,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           className="fixed inset-0 bg-gray-600 bg-opacity-75"
           aria-hidden="true"
           onClick={() => setSidebarOpen(false)}
-        ></div>
+        />
         <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white">
           <div className="flex h-16 flex-shrink-0 items-center px-4 bg-indigo-600">
             <h1 className="text-xl font-bold text-white">AcademiaLens</h1>
@@ -81,7 +125,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="mt-auto p-4">
               <div className="flex items-center">
                 <div className="h-10 w-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 font-semibold">
-                  {user?.name?.charAt(0) || 'U'}
+                  {getUserInitials()}
                 </div>
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-700">{user?.name || 'User'}</p>
@@ -133,7 +177,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="mt-auto p-4">
               <div className="flex items-center">
                 <div className="h-10 w-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 font-semibold">
-                  {user?.name?.charAt(0) || 'U'}
+                  {getUserInitials()}
                 </div>
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-700">{user?.name || 'User'}</p>
@@ -165,7 +209,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         <main className="flex-1">
           <div className="py-6">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">{children}</div>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
           </div>
         </main>
       </div>
