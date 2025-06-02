@@ -52,8 +52,6 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 ## Phase 1: MVP - Core Ingestion & Basic Insight (Weeks 1-4)
 
-## Phase 1: MVP - Core Ingestion & Basic Insight (Weeks 1-4)
-
 ### Frontend Development
 
 #### Project Setup (Frontend)
@@ -66,18 +64,20 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-103** Add `.editorconfig` for consistent code style 👤 FE1 ✅ 2025-06-02
   - [ ] **T-104** Initialize Git repository with `.gitignore` 👤 FE1 📅 2025-06-04
 
-- [ ] **T-105** Configure Development Environment
-  - [ ] **T-106** Set up ESLint with TypeScript and React Hooks plugins 👤 FE2 📅 2025-06-05
-  - [ ] **T-107** Configure Prettier with shared config 👤 FE2 📅 2025-06-05
-  - [ ] **T-108** Add Husky for git hooks 👤 FE2 📅 2025-06-05
-  - [ ] **T-109** Set up lint-staged for pre-commit checks 👤 FE2 📅 2025-06-05
+- [x] **T-105** Configure Development Environment ✅ 2025-06-02
+  - [x] **T-106** Set up ESLint with TypeScript and React Hooks plugins 👤 FE2 ✅ 2025-06-02
+  - [x] **T-107** Configure Prettier with shared config 👤 FE2 ✅ 2025-06-02
+  - [x] **T-108** Add Husky for git hooks 👤 FE2 ✅ 2025-06-02
+  - [x] **T-109** Set up lint-staged for pre-commit checks 👤 FE2 ✅ 2025-06-02
 
-- [ ] **T-110** UI Component Library & Styling
-  - [ ] **T-111** Install and configure Tailwind CSS v3+ 👤 FE3 📅 2025-06-06
-  - [ ] **T-112** Set up CSS variables for theming 👤 FE3 📅 2025-06-06
-  - [ ] **T-113** Create base components (Button, Input, Form) 👤 FE3 📅 2025-06-07
-  - [ ] **T-114** Implement responsive layout components 👤 FE3 📅 2025-06-08
-  - [ ] **T-115** Set up global styles and CSS reset 👤 FE3 📅 2025-06-08
+- [x] **T-110** UI Component Library & Styling ✅ 2025-06-02
+  - [x] **T-111** Install and configure Tailwind CSS v4+ 👤 FE3 ✅ 2025-06-02
+  - [x] **T-112** Set up CSS variables for theming 👤 FE3 ✅ 2025-06-02
+  - [x] **T-113** Create base components (Button, Input, Form) 👤 FE3 ✅ 2025-06-02
+  - [x] **T-114** Implement responsive layout components 👤 FE3 ✅ 2025-06-02
+  - [x] **T-115** Set up global styles and CSS reset 👤 FE3 ✅ 2025-06-02
+    - Updated to use Tailwind v4 syntax with `@import "tailwindcss/preflight"`
+    - Configured PostCSS with necessary plugins
 
 - [ ] **T-116** State Management
   - [ ] **T-117** Set up React Query for server state 👤 FE1 📅 2025-06-09
@@ -86,8 +86,8 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [ ] **T-119** Create API client with axios 👤 FE1 📅 2025-06-10
   - [ ] **T-120** Implement global error boundary 👤 FE2 📅 2025-06-10
 
-- [ ] **T-121** Project Structure
-  - [ ] **T-122** Create directory structure 👤 FE1 📅 2025-06-05
+- [x] **T-121** Project Structure ✅ 2025-06-02
+  - [x] **T-122** Create directory structure 👤 FE1 ✅ 2025-06-02
     ```
     src/
       components/    # Reusable UI components
@@ -100,8 +100,17 @@ This document serves as a centralized task tracker for the AcademiaLens project,
       lib/           # Third-party initializations
       public/        # Static assets
     ```
-  - [ ] **T-123** Set up TypeScript path aliases 👤 FE1 📅 2025-06-05
-  - [ ] **T-124** Configure environment variables handling 👤 FE2 📅 2025-06-06
+  - [x] **T-123** Set up UI components structure 👤 FE3 ✅ 2025-06-02
+  - [x] **T-124** Configure shared utilities and types 👤 FE1 ✅ 2025-06-02
+  - [x] **T-125** Set up TypeScript path aliases 👤 FE1 ✅ 2025-06-02
+  - [x] **T-126** Configure environment variables handling 👤 FE2 ✅ 2025-06-02
+
+- [x] **T-130** Notification System ✅ 2025-06-02
+  - [x] **T-131** Implement toast notification component 👤 FE3 ✅ 2025-06-02
+  - [x] **T-132** Create custom toast hook with TypeScript support 👤 FE3 ✅ 2025-06-02
+  - [x] **T-133** Add success/error/info toast variants 👤 FE3 ✅ 2025-06-02
+  - [x] **T-134** Implement auto-dismiss functionality 👤 FE3 ✅ 2025-06-02
+  - [x] **T-135** Add accessibility support 👤 FE3 ✅ 2025-06-02
 
 - [ ] **T-125** Documentation
   - [ ] **T-126** Add README with setup instructions 👤 FE1 📅 2025-06-11
@@ -129,28 +138,28 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 - @fe-team/docs - Documentation and guidelines
 #### User Authentication (Frontend)
 
-- [ ] **T-200** Authentication Pages
-  - [ ] **T-201** Implement login page 👤 FE4 📅 2025-06-14
-    - [ ] **T-202** Email/Password form with validation 👤 FE4 📅 2025-06-14
+- [x] **T-200** Authentication Pages ✅ 2025-06-02
+  - [x] **T-201** Implement login page 👤 FE4 ✅ 2025-06-02
+    - [x] **T-202** Email/Password form with validation 👤 FE4 ✅ 2025-06-02
       - Uses shared form components (T-113)
       - Implements client-side validation
-    - [ ] **T-203** "Remember me" functionality 👤 FE4 📅 2025-06-14
-    - [ ] **T-204** Forgot password link 👤 FE4 📅 2025-06-14
-  - [ ] **T-205** Implement signup page 👤 FE4 📅 2025-06-15
-    - [ ] **T-206** Registration form with validation 👤 FE4 📅 2025-06-15
-    - [ ] **T-207** Password strength meter 👤 FE4 📅 2025-06-15
-    - [ ] **T-208** Terms & conditions checkbox 👤 FE4 📅 2025-06-15
-  - [ ] **T-209** Password reset flow 👤 FE5 📅 2025-06-16
-    - [ ] **T-210** Request reset email form 👤 FE5 📅 2025-06-16
-    - [ ] **T-211** Reset password form 👤 FE5 📅 2025-06-16
+    - [x] **T-203** "Remember me" functionality 👤 FE4 ✅ 2025-06-02
+    - [x] **T-204** Forgot password link 👤 FE4 ✅ 2025-06-02
+  - [x] **T-205** Implement signup page 👤 FE4 ✅ 2025-06-02
+    - [x] **T-206** Registration form with validation 👤 FE4 ✅ 2025-06-02
+    - [x] **T-207** Password strength meter 👤 FE4 ✅ 2025-06-02
+    - [x] **T-208** Terms & conditions checkbox 👤 FE4 ✅ 2025-06-02
+  - [x] **T-209** Password reset flow 👤 FE5 ✅ 2025-06-02
+    - [x] **T-210** Request reset email form 👤 FE5 ✅ 2025-06-02
+    - [x] **T-211** Reset password form 👤 FE5 ✅ 2025-06-02
 
-- [ ] **T-212** Authentication State Management
-  - [ ] **T-213** Create auth context/provider 👤 FE5 📅 2025-06-17
-    - Depends on BE auth endpoints
-  - [ ] **T-214** Implement JWT token handling 👤 FE5 📅 2025-06-17
-  - [ ] **T-215** Set up token refresh mechanism 👤 FE5 📅 2025-06-17
-  - [ ] **T-216** Implement protected routes 👤 FE5 📅 2025-06-18
-  - [ ] **T-217** Add auth state persistence 👤 FE5 📅 2025-06-18
+- [x] **T-212** Authentication State Management ✅ 2025-06-02
+  - [x] **T-213** Create auth context/provider 👤 FE5 ✅ 2025-06-02
+    - Integrates with Next.js middleware for route protection
+  - [x] **T-214** Implement JWT token handling 👤 FE5 ✅ 2025-06-02
+  - [x] **T-215** Set up token refresh mechanism 👤 FE5 ✅ 2025-06-02
+  - [x] **T-216** Implement protected routes 👤 FE5 ✅ 2025-06-02
+  - [x] **T-217** Add auth state persistence 👤 FE5 ✅ 2025-06-02
 
 - [ ] **T-218** User Profile
   - [ ] **T-219** Profile page layout 👤 FE6 📅 2025-06-19

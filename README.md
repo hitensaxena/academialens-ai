@@ -34,12 +34,16 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
 ### Frontend
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
 - **Styling**: 
-  - [Tailwind CSS](https://tailwindcss.com/)
+  - [Tailwind CSS v4](https://tailwindcss.com/) with modern syntax
   - [shadcn/ui](https://ui.shadcn.com/) components
   - CSS Modules
 - **State Management**:
   - [React Query](https://tanstack.com/query) (Server State)
   - [Zustand](https://github.com/pmndrs/zustand) (Client State)
+- **UI Components**:
+  - Custom toast notification system
+  - Accessible form components
+  - Responsive layout components
 - **Form Handling**:
   - [React Hook Form](https://react-hook-form.com/)
   - [Zod](https://zod.dev/) for schema validation
@@ -194,6 +198,29 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [shadcn/ui Documentation](https://ui.shadcn.com/docs)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
+
+## 🎯 Recent Improvements
+
+### Authentication & UI
+- Implemented secure authentication flow with email/password
+- Added password reset and email verification
+- Created responsive auth pages with form validation
+- Built a custom toast notification system
+- Standardized UI components with consistent theming
+
+### Code Quality
+- Set up TypeScript with strict type checking
+- Configured ESLint and Prettier for code consistency
+- Fixed all TypeScript and ESLint errors
+- Improved type safety across the codebase
+- Organized UI components with consistent import paths
+
+### Developer Experience
+- Set up Next.js 14 with App Router
+- Configured Tailwind CSS v4 with modern syntax
+- Added shadcn/ui components
+- Set up React Query for server state management
+- Implemented Zustand for client state management
 
 ## 📝 Project Status
 

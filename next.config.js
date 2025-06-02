@@ -1,23 +1,22 @@
 /** @type {import('next').NextConfig} */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzerConfig = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
-
-// Ensure TypeScript paths are handled correctly
-const path = require('path');
 
 const nextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
-  
+
   // Enable SWC minification
   swcMinify: true,
-  
+
   // Enable ES modules
   experimental: {
     esmExternals: true,
   },
-  
+
   // Image optimization
   images: {
     domains: ['localhost', 'academialens.com'],
@@ -25,14 +24,14 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  
+
   // Internationalization
   i18n: {
     locales: ['en', 'es', 'fr'],
     defaultLocale: 'en',
     localeDetection: true,
   },
-  
+
   // Webpack configuration
   webpack: (config, { isServer }) => {
     // Add custom webpack configurations here
@@ -43,14 +42,14 @@ const nextConfig = {
         fs: false,
       };
     }
-    
+
     return config;
   },
-  
+
   // Environment variables
   env: {
     NEXT_PUBLIC_APP_ENV: process.env.NODE_ENV || 'development',
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzerConfig(nextConfig);
