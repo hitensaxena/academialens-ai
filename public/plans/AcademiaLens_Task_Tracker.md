@@ -222,7 +222,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
       - [x] Create Popover ✅ 2025-06-03
         - [x] Implemented accessible popover with Radix UI
         - [x] Added header, footer, title, and description components
-        - [x] Created Storybook stories with form examples
+        - [x] Created documentation with form examples
     - [x] **T-129.5** Documentation & Patterns ✅ 2025-06-03
       - [x] Document component patterns
       - [x] Add JSDoc comments
@@ -230,14 +230,21 @@ This document serves as a centralized task tracker for the AcademiaLens project,
       - [x] Create comprehensive documentation in `/docs` directory
       - [x] Document navigation components
       - [x] Document feedback components
-- [x] **T-130** Storybook Setup 👤 FE3 ✅ 2025-06-03
-    - [x] Configure Storybook with Webpack 5 and TypeScript support
-    - [x] Create stories for all UI components
-    - [x] Document component props using JSDoc
-    - [x] Add accessibility testing with @storybook/addon-a11y
-    - [x] Set up viewport testing for responsive design
-    - [x] Add dark/light theme toggle in Storybook
-    - [ ] Set up visual regression testing
+- [x] **T-130** Component Library (Planned)
+- [ ] Set up component documentation
+  - [ ] Choose documentation solution
+  - [ ] Document core UI components
+  - [ ] Add prop documentation and usage examples
+  - [ ] Add accessibility information
+- [ ] Document component development workflow
+  - [ ] Create contribution guidelines
+  - [ ] Add documentation for adding new components
+  - [ ] Set up templates for new components
+- [ ] Document component API
+  - [ ] Document TypeScript prop types
+  - [ ] Document component variants and states
+  - [ ] Add usage guidelines and best practices
+  - [ ] Document accessibility requirements
 
 #### Dependencies
 - **Shared Components**:

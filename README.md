@@ -4,14 +4,6 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
 
 ## 🚀 Features
 
-### 🎨 Component Library & Documentation
-- 📚 Comprehensive UI component library built with Radix UI primitives
-- 🎭 Interactive documentation with [Storybook](http://localhost:6006)
-- ♿ Accessibility-first components with full keyboard navigation
-- 🌓 Built-in dark/light theme support
-- 📱 Fully responsive components
-- 🧪 Tested with React Testing Library
-
 ### 🔐 Authentication & Security
 - Secure user authentication with email/password
 - Password reset functionality

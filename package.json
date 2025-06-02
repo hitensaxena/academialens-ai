@@ -15,9 +15,7 @@
     "analyze:server": "ANALYZE=server next build",
     "analyze:browser": "ANALYZE=browser next build",
     "i18n:extract": "next-intl-cli extract",
-    "i18n:compile": "next-intl-cli compile",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "i18n:compile": "next-intl-cli compile"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -60,21 +58,8 @@
     "zod": "^3.25.48"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3",
     "@next/bundle-analyzer": "^15.3.3",
-    "@storybook/addon-a11y": "^8.6.14",
-    "@storybook/addon-essentials": "^8.6.14",
-    "@storybook/addon-interactions": "^8.6.14",
-    "@storybook/addon-links": "^8.6.14",
-    "@storybook/addon-onboarding": "^8.6.14",
-    "@storybook/addon-themes": "^8.6.14",
-    "@storybook/blocks": "^8.6.14",
-    "@storybook/experimental-addon-test": "^8.6.14",
-    "@storybook/experimental-nextjs-vite": "^8.6.14",
-    "@storybook/nextjs": "^8.6.14",
-    "@storybook/react": "^8.6.14",
-    "@storybook/test": "^8.6.14",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20.17.57",
