@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +10,6 @@ import { Button } from '@/components/ui/button/button';
 import { Input } from '@/components/ui/input/input';
 import { Label } from '@/components/ui/label/label';
 import { useToast } from '@/components/ui/use-toast';
-import { useEffect, useState } from 'react';
 
 const resetPasswordSchema = z
   .object({
@@ -29,7 +29,7 @@ const resetPasswordSchema = z
 
 type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
@@ -115,54 +115,88 @@ export default function ResetPasswordPage() {
 
   if (!isValidToken) {
     return (
-      <div className="text-center space-y-4">
-        <h1 className="text-2xl font-semibold tracking-tight">Invalid or Expired Link</h1>
-        <p className="text-muted-foreground">
-          The password reset link is invalid or has expired. Please request a new one.
-        </p>
-        <Button asChild className="mt-4">
-          <Link href="/forgot-password">Request New Link</Link>
-        </Button>
+      <div className="flex min-h-screen flex-col items-center justify-center p-4">
+        <div className="w-full max-w-md space-y-4 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">Invalid or Expired Link</h1>
+          <p className="text-muted-foreground">
+            The password reset link is invalid or has expired. Please request a new one.
+          </p>
+          <Button asChild className="mt-4">
+            <Link href="/forgot-password">Request New Link</Link>
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-6">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Reset your password</h1>
-        <p className="text-sm text-muted-foreground">Enter a new password for your account</p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="password">New Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              {...register('password')}
-              error={errors.password?.message}
-            />
-            <p className="text-xs text-muted-foreground">
-              Must be at least 8 characters with uppercase, lowercase, number, and special character
-            </p>
+    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="flex flex-col space-y-2 text-center">
+          <h1 className="text-2xl font-semibold tracking-tight">Reset Password</h1>
+          <p className="text-sm text-muted-foreground">Enter your new password below</p>
+        </div>
+        <div className="grid gap-6">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="password">New Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  {...register('password')}
+                />
+                {errors.password && (
+                  <p className="text-sm text-red-500">{errors.password.message}</p>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="••••••••"
+                  {...register('confirmPassword')}
+                />
+                {errors.confirmPassword && (
+                  <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
+                )}
+              </div>
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Resetting...' : 'Reset Password'}
+              </Button>
+            </div>
+          </form>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Remember your password?
+              </span>
+            </div>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="confirmPassword">Confirm New Password</Label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              placeholder="••••••••"
-              {...register('confirmPassword')}
-              error={errors.confirmPassword?.message}
-            />
-          </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Updating...' : 'Reset Password'}
+          <Button variant="outline" asChild>
+            <Link href="/login">Sign in</Link>
           </Button>
         </div>
-      </form>
+      </div>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+        </div>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

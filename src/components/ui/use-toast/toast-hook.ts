@@ -10,7 +10,7 @@ export interface ToastActionElementProps extends React.ButtonHTMLAttributes<HTML
   children: React.ReactNode;
   className?: string;
   // Add any additional props that might be needed for the action button
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Type for a toast action element
@@ -62,7 +62,7 @@ interface State {
 interface ToastReturn {
   id: string;
   dismiss: () => void;
-  update: (props: Partial<ToasterToast>) => void;
+  update: (props: Partial<Omit<ToasterToast, 'id'>>) => void;
 }
 
 interface ToastFunction {
@@ -72,7 +72,7 @@ interface ToastFunction {
     opts: {
       loading: React.ReactNode;
       success: (data: T) => React.ReactNode;
-      error: (error: Error) => React.ReactNode;
+      error: (error: unknown) => React.ReactNode;
     }
   ) => ToastReturn;
 }
@@ -117,12 +117,6 @@ function toastReducer(state: State, action: Action): State {
       }
 
       // Dismiss all toasts
-      state.toasts.forEach((toast) => {
-        const timeout = toastTimeouts.get(toast.id);
-        if (timeout) clearTimeout(timeout);
-        toastTimeouts.delete(toast.id);
-      });
-
       return {
         ...state,
         toasts: state.toasts.map((t) => ({ ...t, open: false })),
@@ -146,23 +140,7 @@ function toastReducer(state: State, action: Action): State {
 export function useToast() {
   const [state, dispatch] = React.useReducer(toastReducer, initialState);
 
-  // Helper function to create a toast action element
-  const createToastAction = (props: ToastActionElementProps): ToastActionElement => {
-    const { altText, children, className = '', ...rest } = props;
-
-    // Create a button element with the necessary props
-    const buttonProps: ToastActionElementProps = {
-      ...rest,
-      'aria-label': altText,
-      className:
-        `inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${className}`.trim(),
-      children,
-      altText,
-    };
-
-    // Return the button element with proper typing
-    return React.createElement('button', buttonProps) as unknown as ToastActionElement;
-  };
+  // Removed unused createToastAction function
 
   const dismiss = React.useCallback((toastId?: string) => {
     dispatch({ type: 'DISMISS_TOAST', toastId });
@@ -187,7 +165,7 @@ export function useToast() {
     opts: {
       loading: React.ReactNode;
       success: (data: T) => React.ReactNode;
-      error: (error: Error) => React.ReactNode;
+      error: (error: unknown) => React.ReactNode;
     }
   ) => {
     const id = genId();
@@ -234,8 +212,9 @@ export function useToast() {
     };
   };
 
-  const removeToast = React.useCallback((toastId: string) => {
-    if (toastTimeouts.has(toastId)) return;
+  // Remove toast after delay
+  const scheduleToastRemoval = React.useCallback((toastId: string) => {
+    if (toastTimeouts.has(toastId)) return toastTimeouts.get(toastId);
 
     const timeout = setTimeout(() => {
       toastTimeouts.delete(toastId);
@@ -243,15 +222,17 @@ export function useToast() {
     }, TOAST_REMOVE_DELAY);
 
     toastTimeouts.set(toastId, timeout);
+    return timeout;
   }, []);
 
+  // Schedule toast removal when they're dismissed
   React.useEffect(() => {
     state.toasts.forEach((toast) => {
       if (toast.open === false) {
-        dismiss(toast.id);
+        scheduleToastRemoval(toast.id);
       }
     });
-  }, [state.toasts, dismiss]);
+  }, [state.toasts, dismiss, scheduleToastRemoval]);
 
   return {
     toasts: state.toasts,

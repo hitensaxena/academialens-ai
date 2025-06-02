@@ -58,7 +58,8 @@ const RadioGroup = React.forwardRef<
     },
     ref
   ) => {
-    const groupId = React.useId();
+    const generatedId = React.useId();
+    const groupId = generatedId;
     const descriptionId = `${groupId}-description`;
     const errorId = `${groupId}-error`;
 
@@ -119,69 +120,65 @@ RadioGroup.displayName = 'RadioGroup';
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioGroupItemProps
->(
-  (
-    { className, children, label, description, disabled = false, containerClassName, id, ...props },
-    ref
-  ) => {
-    const itemId = id || React.useId();
-    const hasLabel = label || description;
+>(({ className, disabled = false, containerClassName, id, label, description, ...props }, ref) => {
+  const generatedItemId = React.useId();
+  const itemId = id || generatedItemId;
+  const hasLabel = label || description;
 
-    return (
-      <div
+  return (
+    <div
+      className={cn(
+        'flex items-start space-x-3',
+        disabled && 'cursor-not-allowed opacity-50',
+        containerClassName
+      )}
+    >
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        id={itemId}
         className={cn(
-          'flex items-start space-x-3',
-          disabled && 'cursor-not-allowed opacity-50',
-          containerClassName
+          'peer h-4 w-4 shrink-0 rounded-full border border-primary ring-offset-background',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          'data-[state=checked]:border-primary',
+          className
         )}
+        disabled={disabled}
+        {...props}
       >
-        <RadioGroupPrimitive.Item
-          ref={ref}
-          id={itemId}
-          className={cn(
-            'peer h-4 w-4 shrink-0 rounded-full border border-primary ring-offset-background',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-            'disabled:cursor-not-allowed disabled:opacity-50',
-            'data-[state=checked]:border-primary',
-            className
+        <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+          <Circle className="h-2.5 w-2.5 fill-primary text-primary" />
+        </RadioGroupPrimitive.Indicator>
+      </RadioGroupPrimitive.Item>
+      {hasLabel && (
+        <div className="grid gap-1.5 leading-none">
+          {label && (
+            <label
+              htmlFor={itemId}
+              className={cn(
+                'text-sm font-medium leading-none',
+                disabled ? 'cursor-not-allowed text-muted-foreground' : 'cursor-pointer',
+                'peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+              )}
+            >
+              {label}
+            </label>
           )}
-          disabled={disabled}
-          {...props}
-        >
-          <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-            <Circle className="h-2.5 w-2.5 fill-primary text-primary" />
-          </RadioGroupPrimitive.Indicator>
-        </RadioGroupPrimitive.Item>
-        {hasLabel && (
-          <div className="grid gap-1.5 leading-none">
-            {label && (
-              <label
-                htmlFor={itemId}
-                className={cn(
-                  'text-sm font-medium leading-none',
-                  disabled ? 'cursor-not-allowed text-muted-foreground' : 'cursor-pointer',
-                  'peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-                )}
-              >
-                {label}
-              </label>
-            )}
-            {description && (
-              <p
-                className={cn(
-                  'text-sm',
-                  disabled ? 'text-muted-foreground/70' : 'text-muted-foreground'
-                )}
-              >
-                {description}
-              </p>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
-);
+          {description && (
+            <p
+              className={cn(
+                'text-sm',
+                disabled ? 'text-muted-foreground/70' : 'text-muted-foreground'
+              )}
+            >
+              {description}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+});
 RadioGroupItem.displayName = 'RadioGroupItem';
 
 export { RadioGroup, RadioGroupItem };

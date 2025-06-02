@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 const cardVariants = cva(
@@ -118,12 +119,13 @@ const CardFooter = React.forwardRef<
 CardFooter.displayName = 'CardFooter';
 
 // Additional Components
-const CardMedia = React.forwardRef<HTMLDivElement, React.ImgHTMLAttributes<HTMLImageElement>>(
-  ({ className, alt = '', ...props }, ref) => (
-    <div className="relative w-full overflow-hidden">
-      <img
-        ref={ref as React.RefObject<HTMLImageElement>}
-        className={cn('w-full h-auto object-cover', className)}
+const CardMedia = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof Image>>(
+  ({ className, alt = '', width, height, ...props }, ref) => (
+    <div className={cn('relative w-full overflow-hidden', className)} ref={ref}>
+      <Image
+        width={width || 800}
+        height={height || 450}
+        className="w-full h-auto object-cover"
         alt={alt}
         {...props}
       />

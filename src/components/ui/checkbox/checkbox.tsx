@@ -42,7 +42,8 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
     },
     ref
   ) => {
-    const checkboxId = id || React.useId();
+    const generatedId = React.useId();
+    const checkboxId = id || generatedId;
     const isDisabled = disabled || isLoading;
 
     const checkbox = (

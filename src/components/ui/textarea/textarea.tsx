@@ -46,7 +46,8 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref
   ) => {
-    const textareaId = id || React.useId();
+    const generatedId = React.useId();
+    const textareaId = id || generatedId;
     const hasError = !!error;
     const showSuccess = !hasError && isSuccess;
     const showHelperText = error || description || (showCharCount && maxLength);

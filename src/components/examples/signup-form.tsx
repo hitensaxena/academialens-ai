@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input/input';
 import {
   Form,
   FormControl,
@@ -61,76 +61,61 @@ export function SignUpForm() {
 
       <Form form={form} onSubmit={onSubmit}>
         <div className="space-y-4">
-          <FormField
-            name="email"
-            render={() => (
-              <div className="space-y-2">
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="email@example.com" />
-                </FormControl>
-                <FormMessage />
-              </div>
-            )}
-          />
+          <div className="space-y-2">
+            <FormField name="email">
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="email@example.com" />
+              </FormControl>
+              <FormMessage />
+            </FormField>
+          </div>
 
-          <FormField
-            name="password"
-            render={() => (
-              <div className="space-y-2">
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" />
-                </FormControl>
-                <FormDescription>
-                  Must be at least 8 characters with uppercase, lowercase, and a number
-                </FormDescription>
-                <FormMessage />
-              </div>
-            )}
-          />
+          <div className="space-y-2">
+            <FormField name="password">
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" />
+              </FormControl>
+              <FormDescription>
+                Must be at least 8 characters with uppercase, lowercase, and a number
+              </FormDescription>
+              <FormMessage />
+            </FormField>
+          </div>
 
-          <FormField
-            name="confirmPassword"
-            render={() => (
-              <div className="space-y-2">
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input type="password" />
-                </FormControl>
-                <FormMessage />
-              </div>
-            )}
-          />
+          <div className="space-y-2">
+            <FormField name="confirmPassword">
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input type="password" />
+              </FormControl>
+              <FormMessage />
+            </FormField>
+          </div>
 
-          <FormField
-            name="terms"
-            render={({ field: { value, onChange } }) => (
-              <div className="flex items-start space-x-2">
+          <div className="flex items-start space-x-2">
+            <FormField name="terms">
+              <div className="flex items-center space-x-2">
                 <FormControl>
                   <input
                     type="checkbox"
-                    checked={value}
-                    onChange={(e) => onChange(e.target.checked)}
                     className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                   />
                 </FormControl>
-                <div className="grid gap-1.5 leading-none">
-                  <FormLabel className="font-normal">
-                    I agree to the{' '}
-                    <a href="/terms" className="text-primary hover:underline">
-                      Terms of Service
-                    </a>{' '}
-                    and{' '}
-                    <a href="/privacy" className="text-primary hover:underline">
-                      Privacy Policy
-                    </a>
-                  </FormLabel>
-                  <FormMessage />
-                </div>
+                <FormLabel className="font-normal">
+                  I agree to the{' '}
+                  <a href="/terms" className="text-primary hover:underline">
+                    Terms of Service
+                  </a>{' '}
+                  and{' '}
+                  <a href="/privacy" className="text-primary hover:underline">
+                    Privacy Policy
+                  </a>
+                </FormLabel>
               </div>
-            )}
-          />
+            </FormField>
+          </div>
 
           <Button type="submit" className="w-full">
             Create Account

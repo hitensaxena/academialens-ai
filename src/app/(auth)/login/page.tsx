@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
@@ -12,16 +12,18 @@ import Link from 'next/link';
 import { Loader2, Mail, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export default function LoginPage() {
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { toast } = useToast();
+  const { login } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login } = useAuth();
-  const searchParams = useSearchParams();
-  const { toast } = useToast();
-  const router = useRouter();
+  const redirectTo = searchParams.get('redirectTo') || '/dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +41,6 @@ export default function LoginPage() {
       }
 
       // Redirect to the intended URL or dashboard
-      const redirectTo = searchParams.get('redirect') || '/dashboard';
       router.push(redirectTo);
 
       // Show success toast (handled in AuthContext)
@@ -172,5 +173,19 @@ export default function LoginPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

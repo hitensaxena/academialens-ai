@@ -10,7 +10,7 @@ import {
   type UseFormProps,
 } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type z, type ZodSchema } from 'zod';
+import { type ZodSchema } from 'zod';
 import { cn } from '@/lib/utils';
 
 type FormProps<TFormValues extends FieldValues> = {
@@ -61,11 +61,11 @@ export function useForm<T extends FieldValues>({
   });
 }
 
-type FormFieldContextValue<T extends FieldValues> = {
-  name: keyof T;
-};
+interface FormFieldContextValue {
+  name: string;
+}
 
-const FormFieldContext = React.createContext<FormFieldContextValue<FieldValues> | null>(null);
+const FormFieldContext = React.createContext<FormFieldContextValue | null>(null);
 
 type FormFieldProps<T extends FieldValues> = {
   children: React.ReactNode;
@@ -75,14 +75,14 @@ type FormFieldProps<T extends FieldValues> = {
 
 export function FormField<T extends FieldValues>({ children, name, className }: FormFieldProps<T>) {
   return (
-    <FormFieldContext.Provider value={{ name }}>
+    <FormFieldContext.Provider value={{ name: name as string }}>
       <div className={cn('space-y-2', className)}>{children}</div>
     </FormFieldContext.Provider>
   );
 }
 
 type FormControlProps = {
-  children: React.ReactElement;
+  children: React.ReactElement<Record<string, unknown>>;
 };
 
 export function FormControl({ children }: FormControlProps) {
@@ -94,14 +94,24 @@ export function FormControl({ children }: FormControlProps) {
   }
 
   const { name } = fieldContext;
-  const error = formState.errors[name];
+  const error = formState.errors[name as string];
 
-  return React.cloneElement(children, {
-    ...children.props,
+  // Create a new props object with explicit typing
+  const childProps: Record<string, unknown> = {
     name,
     'aria-invalid': error ? 'true' : 'false',
-    'aria-describedby': error ? `${String(name)}-error` : undefined,
+  };
+
+  // Copy all existing props from children
+  Object.entries(children.props).forEach(([key, value]) => {
+    childProps[key] = value;
   });
+
+  if (error) {
+    childProps['aria-describedby'] = `${String(name)}-error`;
+  }
+
+  return React.cloneElement(children, childProps);
 }
 
 type FormMessageProps = {

@@ -48,7 +48,8 @@ const Switch = React.forwardRef<React.ElementRef<typeof SwitchPrimitives.Root>, 
     },
     ref
   ) => {
-    const switchId = id || React.useId();
+    const generatedId = React.useId();
+    const switchId = id || generatedId;
     const hasError = !!error;
     const showSuccess = !hasError && isSuccess;
     const isDisabled = disabled || isLoading;

@@ -1,13 +1,13 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button/button';
 import { useToast } from '@/components/ui/use-toast';
 import Link from 'next/link';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { toast } = useToast();
@@ -49,12 +49,6 @@ export default function VerifyEmailPage() {
         console.error('Email verification error:', error);
         setStatus('error');
         setMessage('Failed to verify your email. The link may have expired or is invalid.');
-
-        toast({
-          title: 'Verification failed',
-          description: 'Failed to verify your email. Please try again.',
-          variant: 'destructive',
-        });
       }
     };
 
@@ -62,65 +56,53 @@ export default function VerifyEmailPage() {
   }, [searchParams, router, toast]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-6 text-center">
-      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+      <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-8 text-card-foreground shadow-sm">
+        <div className="space-y-2 text-center">
+          <h1 className="text-2xl font-bold tracking-tight">
+            {status === 'verifying' && 'Verifying Your Email'}
+            {status === 'success' && 'Email Verified'}
+            {status === 'error' && 'Verification Failed'}
+          </h1>
+          <p className="text-sm text-muted-foreground">{message}</p>
+        </div>
+
         {status === 'verifying' && (
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+          <div className="flex justify-center py-4">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+          </div>
         )}
-        {status === 'success' && (
-          <svg
-            className="h-12 w-12 text-green-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        )}
+
         {status === 'error' && (
-          <svg
-            className="h-12 w-12 text-red-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <div className="pt-4">
+            <Button className="w-full" asChild>
+              <Link href="/signup">Back to Sign Up</Link>
+            </Button>
+          </div>
+        )}
+
+        {status === 'success' && (
+          <div className="pt-4">
+            <p className="text-center text-sm text-muted-foreground">
+              Redirecting to login page...
+            </p>
+          </div>
         )}
       </div>
-
-      <h1 className="text-2xl font-semibold tracking-tight">
-        {status === 'verifying' && 'Verifying your email...'}
-        {status === 'success' && 'Email Verified!'}
-        {status === 'error' && 'Verification Failed'}
-      </h1>
-
-      <p className="text-muted-foreground max-w-md">{message}</p>
-
-      {status === 'success' && (
-        <div className="flex flex-col space-y-2">
-          <p className="text-sm text-muted-foreground">Redirecting to login page...</p>
-          <Button asChild variant="link" className="text-primary">
-            <Link href="/login">Go to login now</Link>
-          </Button>
-        </div>
-      )}
-
-      {status === 'error' && (
-        <div className="flex flex-col space-y-4">
-          <Button asChild>
-            <Link href="/signup">Sign up again</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href="/login">Back to login</Link>
-          </Button>
-        </div>
-      )}
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+        </div>
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
