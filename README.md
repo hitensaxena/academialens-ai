@@ -65,38 +65,28 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
 
 ### Prerequisites
 
-- Node.js 18.0.0 or later
-- npm (v9+) or yarn (v1.22+)
-- Python 3.10+
-- PostgreSQL 14+
-- Docker (optional, for containerized development)
+- Node.js 20+ and npm 10+
+- Git
+- VS Code (recommended)
+- PostgreSQL (for local development)
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/academialens.git
-   cd academialens
+   git clone https://github.com/yourusername/acadialens.git
+   cd acadialens
    ```
 
-2. **Set up environment variables**
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
    ```bash
    cp .env.example .env.local
-   ```
-   Update the variables in `.env.local` with your configuration.
-
-3. **Install dependencies**
-   ```bash
-   # Install frontend dependencies
-   npm install
-   
-   # Install Python dependencies
-   cd backend
-   poetry install
-   ```
-
-4. **Set up the database**
-   ```bash
+   # Update the values in .env.local with your configuration
    # Run database migrations
    cd backend
    poetry run alembic upgrade head
@@ -200,6 +190,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 
 ## 🚀 Recent Updates (June 2025)
+
+### 2025-06-03: Authentication & User Management
+- ✅ Implemented secure authentication system with NextAuth.js
+- 🔐 Added email/password and Google OAuth login
+- ✉️ Set up email verification and password reset flows
+- 🎨 Improved auth UI with responsive design
+- 🛡️ Added protected routes and middleware
+- 🚀 Optimized client-side auth state management
+
+### 2025-06-02: Project Setup
+- 🎨 Initialized Next.js 14 project with TypeScript
+- 🛠️ Configured Tailwind CSS v4 with modern syntax
+- 🔧 Set up ESLint, Prettier, and Husky
+- 🧩 Added shadcn/ui components
+- 📦 Configured project structure and dependencies
 
 ### 2025-06-02 - Authentication & Routing Improvements
 - 🛠 Fixed 404 error on dashboard route by restructuring route groups

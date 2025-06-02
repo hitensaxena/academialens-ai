@@ -12,6 +12,11 @@ type User = {
   emailVerified: boolean;
   role: string;
   avatar?: string;
+  bio?: string;
+  location?: string;
+  website?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 // Define the auth context type
@@ -26,6 +31,8 @@ type AuthContextType = {
   resetPassword: (token: string, email: string) => Promise<void>;
   verifyEmail: (token: string) => Promise<boolean>;
   refreshUser: () => Promise<boolean>;
+  updateProfile: (updates: Partial<User>) => Promise<User>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 };
 
 // Create the auth context
@@ -46,16 +53,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Check if user is authenticated
   const isAuthenticated = !!user;
 
+  // Helper function to get cookie value
+  const getCookie = (name: string) => {
+    if (typeof document === 'undefined') return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+    return null;
+  };
+
   // Initialize auth state on mount and on token changes
   useEffect(() => {
     console.log('AuthProvider mounted, initializing auth state...');
-
-    const getCookie = (name: string) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(';').shift();
-      return null;
-    };
 
     const initializeAuth = async () => {
       try {
@@ -72,6 +81,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
             email: 'demo@example.com',
             emailVerified: true,
             role: 'user',
+            bio: 'Researcher and academic enthusiast',
+            location: 'New York, NY',
+            website: 'https://example.com',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           };
 
           console.log('Auth init - Setting user:', mockUser);
@@ -137,6 +151,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         emailVerified: true,
         role: 'user',
+        bio: 'Researcher and academic enthusiast',
+        location: 'New York, NY',
+        website: 'https://example.com',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
       // Store token in cookies
@@ -328,6 +347,83 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  // Update user profile
+  const updateProfile = async (updates: Partial<User>): Promise<User> => {
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+
+    try {
+      setIsLoading(true);
+
+      // In a real app, make an API call to update the profile
+      console.log('Updating profile with:', updates);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Simulate updated user data
+      const updatedUser = {
+        ...user,
+        ...updates,
+        updatedAt: new Date().toISOString(),
+      };
+
+      // Update the user in state
+      setUser(updatedUser);
+
+      toast({
+        title: 'Profile updated',
+        description: 'Your profile has been updated successfully.',
+      });
+
+      return updatedUser;
+    } catch (error) {
+      console.error('Profile update error:', error);
+      toast({
+        title: 'Update failed',
+        description: 'Failed to update profile. Please try again.',
+        variant: 'destructive',
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Change password
+  const changePassword = async (currentPassword: string, newPassword: string): Promise<void> => {
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+
+    try {
+      setIsLoading(true);
+
+      // In a real app, make an API call to change the password
+      console.log('Changing password for user:', user.email);
+      console.log('Current password length:', currentPassword.length);
+      console.log('New password length:', newPassword.length);
+
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast({
+        title: 'Password changed',
+        description: 'Your password has been updated successfully.',
+      });
+    } catch (error) {
+      console.error('Password change error:', error);
+      toast({
+        title: 'Password change failed',
+        description:
+          error instanceof Error ? error.message : 'Failed to change password. Please try again.',
+        variant: 'destructive',
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Context value
   const value = {
     user,
@@ -340,6 +436,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     resetPassword,
     verifyEmail,
     refreshUser,
+    updateProfile,
+    changePassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
