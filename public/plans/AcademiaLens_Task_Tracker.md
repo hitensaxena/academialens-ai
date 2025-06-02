@@ -159,13 +159,13 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-216** Create protected route component 👤 FE4 ✅ 2025-06-02
   - [x] **T-217** Implement route guards 👤 FE4 ✅ 2025-06-02
   - [x] **T-218** Handle unauthorized access 👤 FE4 ✅ 2025-06-02
-  - [ ] **T-217** Implement route guards 👤 FE4 📅 2025-06-03
-  - [ ] **T-218** Handle unauthorized access 👤 FE4 📅 2025-06-03
+  - [x] **T-219** Fix route group structure for dashboard 👤 FE4 ✅ 2025-06-02
+  - [x] **T-220** Update middleware for auth protection 👤 FE4 ✅ 2025-06-02
 
-- [ ] **T-220** Session Management
-  - [ ] **T-221** Implement session refresh 👤 FE5 📅 2025-06-04
-  - [ ] **T-222** Handle token expiration 👤 FE5 📅 2025-06-04
-  - [ ] **T-223** Concurrent session management 👤 FE5 📅 2025-06-04
+- [x] **T-220** Session Management ✅ 2025-06-02
+  - [x] **T-221** Implement session refresh 👤 FE5 ✅ 2025-06-02
+  - [x] **T-222** Handle token expiration 👤 FE5 ✅ 2025-06-02
+  - [x] **T-223** Concurrent session management 👤 FE5 ✅ 2025-06-02
     - [x] **T-210** Request reset email form 👤 FE5 ✅ 2025-06-02
     - [x] **T-211** Reset password form 👤 FE5 ✅ 2025-06-02
 
@@ -176,6 +176,8 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-215** Set up token refresh mechanism 👤 FE5 ✅ 2025-06-02
   - [x] **T-216** Implement protected routes 👤 FE5 ✅ 2025-06-02
   - [x] **T-217** Add auth state persistence 👤 FE5 ✅ 2025-06-02
+  - [x] **T-217.1** Fix auth token handling in cookies 👤 FE5 ✅ 2025-06-02
+  - [x] **T-217.2** Update auth flow for proper redirects 👤 FE5 ✅ 2025-06-02
 
 - [ ] **T-218** User Profile
   - [ ] **T-219** Profile page layout 👤 FE6 📅 2025-06-19

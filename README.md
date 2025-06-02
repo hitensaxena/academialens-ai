@@ -201,6 +201,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚀 Recent Updates (June 2025)
 
+### 2025-06-02 - Authentication & Routing Improvements
+- 🛠 Fixed 404 error on dashboard route by restructuring route groups
+- 🔄 Improved authentication flow with proper redirects
+- 🛡 Enhanced middleware for protected routes
+- 🐛 Fixed auth token handling in cookies
+- 🔍 Added comprehensive debug logging for auth state
+- 🧹 Code cleanup and linting fixes
+- 📝 Updated documentation for auth flow
+
+### 2025-06-01 - Project Initialization
+- 🎉 Initialized Next.js 14 project with TypeScript
+- 🎨 Set up Tailwind CSS v4 with modern syntax
+- 🔧 Configured ESLint, Prettier, and Husky
+- 📦 Installed core dependencies
+- 📝 Created project documentation
+
 ### 🛠 Fixed
 - Resolved 404 error on dashboard route by restructuring route groups
 - Improved authentication flow with proper redirects
