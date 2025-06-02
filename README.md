@@ -1,36 +1,200 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AcademiaLens - AI-Powered Research Assistant
 
-## Getting Started
+AcademiaLens is an AI-powered research assistant that helps researchers, students, and academics analyze and extract insights from academic papers and research documents. Built with modern web technologies, AcademiaLens provides a seamless experience for managing and understanding research materials.
 
-First, run the development server:
+## 🚀 Features
+
+### 🔐 Authentication & Security
+- Secure user authentication with email/password
+- Password reset functionality
+- Email verification
+- Protected routes and role-based access control
+
+### 📚 Document Management
+- Upload and organize research papers (PDF, DOCX, etc.)
+- Document preview and search
+- AI-powered document analysis
+- Categorization and tagging system
+
+### 🧠 AI-Powered Analysis
+- Automatic document summarization
+- Key concept extraction
+- Citation and reference analysis
+- Research gap identification
+- Smart search across document contents
+
+### 🎨 User Experience
+- Light and dark mode
+- Responsive design for all devices
+- Intuitive user interface
+- Keyboard shortcuts for power users
+
+## 🛠 Tech Stack
+
+### Frontend
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: 
+  - [Tailwind CSS](https://tailwindcss.com/)
+  - [shadcn/ui](https://ui.shadcn.com/) components
+  - CSS Modules
+- **State Management**:
+  - [React Query](https://tanstack.com/query) (Server State)
+  - [Zustand](https://github.com/pmndrs/zustand) (Client State)
+- **Form Handling**:
+  - [React Hook Form](https://react-hook-form.com/)
+  - [Zod](https://zod.dev/) for schema validation
+
+### Backend
+- **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
+- **Database**: PostgreSQL with Prisma ORM
+- **Search**: Vector database for semantic search
+- **AI/ML**: Gemini API for document analysis
+- **API**: RESTful API with OpenAPI documentation
+
+### DevOps
+- **Containerization**: Docker
+- **CI/CD**: GitHub Actions
+- **Infrastructure as Code**: Terraform
+- **Monitoring**: Prometheus + Grafana
+
+## 🏁 Getting Started
+
+### Prerequisites
+
+- Node.js 18.0.0 or later
+- npm (v9+) or yarn (v1.22+)
+- Python 3.10+
+- PostgreSQL 14+
+- Docker (optional, for containerized development)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/academialens.git
+   cd academialens
+   ```
+
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Update the variables in `.env.local` with your configuration.
+
+3. **Install dependencies**
+   ```bash
+   # Install frontend dependencies
+   npm install
+   
+   # Install Python dependencies
+   cd backend
+   poetry install
+   ```
+
+4. **Set up the database**
+   ```bash
+   # Run database migrations
+   cd backend
+   poetry run alembic upgrade head
+   ```
+
+5. **Start the development servers**
+   ```bash
+   # In the root directory
+   npm run dev
+   
+   # In a new terminal, from the backend directory
+   cd backend
+   poetry run uvicorn app.main:app --reload
+   ```
+
+   The application will be available at [http://localhost:3000](http://localhost:3000)
+
+## 🧪 Testing
+
+Run the test suite:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Run all tests
+npm test
+
+# Run frontend tests
+npm test:frontend
+
+# Run backend tests
+cd backend
+poetry run pytest
+
+# Run tests with coverage
+npm run test:coverage
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Code Style
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+We use:
+- Prettier for code formatting
+- ESLint for JavaScript/TypeScript linting
+- Black and isort for Python code formatting
+- TypeScript for type safety
 
-## Learn More
+Before committing, run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Format and lint code
+npm run format
+npm run lint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Type checking
+npm run typecheck
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Git Workflow
 
-## Deploy on Vercel
+1. Create a new branch for your feature or bugfix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/your-bugfix-name
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Make your changes and commit them with a descriptive message:
+   ```bash
+   git add .
+   git commit -m "feat: add new feature"
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Push your changes and create a pull request.
+
+### Commit Message Format
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+- `feat:` A new feature
+- `fix:` A bug fix
+- `docs:` Documentation only changes
+- `style:` Changes that don't affect the meaning of the code
+- `refactor:` A code change that neither fixes a bug nor adds a feature
+- `perf:` A code change that improves performance
+- `test:` Adding missing tests or correcting existing tests
+- `chore:` Changes to the build process or auxiliary tools
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com/docs)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+
+## 📝 Project Status
+
+🚧 Under active development. See our [project board](https://github.com/yourusername/academialens/projects/1) for current progress and upcoming features.
