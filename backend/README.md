@@ -53,3 +53,4 @@ This directory contains the backend service for the AcademiaLens project, built 
 
 ```bash
 poetry run alembic upgrade head
+```

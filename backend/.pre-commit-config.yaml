@@ -21,19 +21,17 @@ repos:
     rev: 5.13.2 # Match version in pyproject.toml
     hooks:
       - id: isort
-        args: ["--profile", "black", "--line-length=88"]
+        args: ['--profile', 'black', '--line-length=88']
 
   - repo: https://github.com/pycqa/flake8
     rev: 7.0.0 # Match version in pyproject.toml
     hooks:
       - id: flake8
-        additional_dependencies: # Add flake8 plugins if needed
-          # - flake8-bugbear
-          # - flake8-comprehensions
-          # - flake8-print
+        additional_dependencies: [] # Add flake8 plugins if needed, e.g.: ["flake8-bugbear"]
         args:
-          - "--max-line-length=88"
-          - "--ignore=E203,W503" # E203: whitespace before ':', W503: line break before binary operator (black handles these)
+          - '--max-line-length=88'
+          - '--ignore=E203,W503' # E203: whitespace before ':', W503: line break before binary operator (black handles these)
+
 
   # Optional: Mypy for static type checking
   # - repo: https://github.com/pre-commit/mirrors-mypy
