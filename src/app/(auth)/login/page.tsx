@@ -105,23 +105,22 @@ function LoginForm() {
   };
 
   return (
-    <>
-      {/* Welcome Back Heading & Subheading - MOVED OUTSIDE AND ABOVE THE CARD */}
-      <div className="text-left space-y-1 mb-6 sm:mb-8">
-        <h2 className="text-2xl font-bold text-figmaText-heading">Welcome Back</h2>
-        <p className="text-sm text-figmaText-subheading">Login to your account below</p>
+    <div className="w-full flex flex-col items-center">
+      {/* Title & Subtitle */}
+      <div className="mb-6">
+        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">Welcome Back</h1>
+        <p className="text-base text-center text-muted-foreground">Login to your account below</p>
       </div>
 
-      {/* Main card container for form elements */}
-      <div className="bg-white p-10 rounded-2xl shadow-lg w-full">
-        {/* Inner container for content, ensures max-width for form elements */}
-        <div className="w-full max-w-[360px] mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Card */}
+      <div className="w-full rounded-2xl bg-card text-card-foreground p-10 shadow-xl">
+        <div className="w-full space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Input */}
             <div>
               <Label
                 htmlFor="email"
-                className="block text-sm font-medium text-figmaText-label mb-1"
+                className="block text-sm font-medium text-figmaText-label mb-2"
               >
                 Email
               </Label>
@@ -133,14 +132,14 @@ function LoginForm() {
                 placeholder="Your Email Address"
                 value={email}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
+                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
               />
               {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
             </div>
 
             {/* Password Input */}
             <div>
-              <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center justify-between">
                 <Label
                   htmlFor="password"
                   className="block text-sm font-medium text-figmaText-label"
@@ -164,7 +163,7 @@ function LoginForm() {
                   placeholder="Your Password"
                   value={password}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                  className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
                 />
                 <button
                   type="button"
@@ -183,7 +182,7 @@ function LoginForm() {
             </div>
 
             {/* Remember Me Checkbox */}
-            <div className="flex items-center pt-1">
+            <div className="flex items-center">
               <Checkbox
                 id="remember"
                 checked={rememberMe}
@@ -199,7 +198,7 @@ function LoginForm() {
             </div>
 
             {/* Log In Button */}
-            <div className="pt-1">
+            <div className="mt-2">
               <Button
                 type="submit"
                 disabled={isLoading}
@@ -212,7 +211,7 @@ function LoginForm() {
           </form>
 
           {/* Or continue with Divider */}
-          <div className="relative pt-1">
+          <div className="relative mt-2">
             <div className="absolute inset-0 flex items-center" aria-hidden="true">
               <div className="w-full border-t border-formInput-border" />
             </div>
@@ -224,12 +223,12 @@ function LoginForm() {
           </div>
 
           {/* Google Button */}
-          <div className="pt-1">
+          <div className="mt-2">
             <Button
               type="button"
               variant="outline"
               onClick={() => handleSocialLogin('Google')}
-              className="w-full h-12 flex items-center justify-center rounded-md border border-googleButton-border bg-formInput-bg px-4 text-sm font-medium text-googleButton-text hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+              className="w-full h-12 flex items-center justify-center rounded-md border border-googleButton-border bg-white px-4 text-sm font-medium text-googleButton-text hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
             >
               <Icons.google className="mr-2 h-5 w-5" />
               Google
@@ -237,7 +236,7 @@ function LoginForm() {
           </div>
 
           {/* Create Account Link */}
-          <div className="text-center text-sm text-figmaText-subheading pt-2">
+          <div className="text-center text-sm text-figmaText-subheading mt-2">
             Don&apos;t have an account?{' '}
             <Link
               href="/signup"
@@ -261,7 +260,7 @@ function LoginForm() {
         iconSrc={infoDialogContent.iconSrc}
         actionLabel={infoDialogContent.actionLabel}
       />
-    </>
+    </div>
   );
 }
 

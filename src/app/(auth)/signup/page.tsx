@@ -74,28 +74,30 @@ export default function SignupPage() {
   };
 
   return (
-    <>
-      {/* Create Your Account Heading & Subheading - MOVED OUTSIDE AND ABOVE THE CARD */}
-      <div className="text-left space-y-1 mb-6 sm:mb-8">
-        <h2 className="text-2xl font-bold text-figmaText-heading">Create Your Account</h2>
-        <p className="text-sm text-figmaText-subheading">
+    <div className="w-full flex flex-col items-center">
+      {/* Title & Subtitle */}
+      <div className="mb-6">
+        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">
+          Create Your Account
+        </h1>
+        <p className="text-base text-center text-muted-foreground">
           Provide us details to create a new account
         </p>
       </div>
 
-      {/* Main card container for form elements */}
-      <div className="bg-white p-10 rounded-2xl shadow-lg w-full">
-        <div className="w-full max-w-[360px] mx-auto space-y-5">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      {/* Card */}
+      <div className="w-full rounded-2xl bg-card text-card-foreground p-10 shadow-xl">
+        <div className="w-full space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Full Name Input */}
             <div>
-              <Label htmlFor="name" className="block text-sm font-medium text-figmaText-label mb-1">
+              <Label htmlFor="name" className="block text-sm font-medium text-figmaText-label mb-2">
                 Full Name
               </Label>
               <Input
                 id="name"
                 placeholder="Your Name"
-                className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.name ? 'border-red-500' : ''}`}
+                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.name ? 'border-red-500' : ''}`}
                 {...register('name')}
                 disabled={isSubmitting}
               />
@@ -106,7 +108,7 @@ export default function SignupPage() {
             <div>
               <Label
                 htmlFor="email"
-                className="block text-sm font-medium text-figmaText-label mb-1"
+                className="block text-sm font-medium text-figmaText-label mb-2"
               >
                 Email
               </Label>
@@ -114,7 +116,7 @@ export default function SignupPage() {
                 id="email"
                 type="email"
                 placeholder="Your Email Address"
-                className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
+                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
                 {...register('email')}
                 disabled={isSubmitting}
               />
@@ -125,7 +127,7 @@ export default function SignupPage() {
             <div>
               <Label
                 htmlFor="password"
-                className="block text-sm font-medium text-figmaText-label mb-1"
+                className="block text-sm font-medium text-figmaText-label mb-2"
               >
                 Password
               </Label>
@@ -134,7 +136,7 @@ export default function SignupPage() {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Create a new password"
-                  className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
                   {...register('password')}
                   disabled={isSubmitting}
                 />
@@ -161,7 +163,7 @@ export default function SignupPage() {
             <div>
               <Label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-figmaText-label mb-1"
+                className="block text-sm font-medium text-figmaText-label mb-2"
               >
                 Confirm Password
               </Label>
@@ -170,7 +172,7 @@ export default function SignupPage() {
                   id="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="Confirm password"
-                  className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.confirmPassword ? 'border-red-500' : ''}`}
                   {...register('confirmPassword')}
                   disabled={isSubmitting}
                 />
@@ -194,7 +196,7 @@ export default function SignupPage() {
             </div>
 
             {/* Terms Checkbox */}
-            <div className="flex items-start space-x-2 pt-1">
+            <div className="flex items-start space-x-2">
               <Checkbox
                 id="terms"
                 className="mt-0.5 h-4 w-4 rounded border-googleButton-border text-link-DEFAULT focus:ring-link-DEFAULT"
@@ -225,7 +227,7 @@ export default function SignupPage() {
             </div>
 
             {/* Sign Up Button */}
-            <div className="pt-1">
+            <div className="mt-2">
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -238,7 +240,7 @@ export default function SignupPage() {
           </form>
 
           {/* Login Link */}
-          <div className="text-center text-sm text-figmaText-subheading pt-2">
+          <div className="text-center text-sm text-figmaText-subheading mt-2">
             Already Have An Account?{' '}
             <Link
               href="/login"
@@ -249,6 +251,6 @@ export default function SignupPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

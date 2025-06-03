@@ -194,6 +194,29 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🚀 Recent Updates (June 2025)
 
+### 2025-06-04: Auth Screens Pixel-Perfect Styling & Refinements
+*   **Unified Auth Screen Styling:**
+    *   Adjusted card widths (`max-w-lg` via `(auth)/layout.tsx`), padding (`p-10`), and internal spacing (`space-y-6`) across Login, Signup, Forgot Password, and Reset Password Success pages for consistency with Figma designs.
+    *   Standardized title font sizes (`text-4xl`) and margins (`mb-6`).
+    *   Ensured consistent input label margins (`mb-2`) and input padding/focus styles.
+    *   Simplified root container `div`s on auth pages to rely on `(auth)/layout.tsx` for width constraints.
+*   **Specific Page Adjustments:**
+    *   **Login/Signup:** Aligned card dimensions and internal vertical spacing. Styled Google Sign-In button with a white background.
+    *   **Forgot Password:** Restructured to match login/signup card layout, fixed JSX errors.
+    *   **Reset Password Success:** Aligned outer container with other auth pages, ensuring consistent card padding and width. Fixed JSX structural issues.
+    *   **Verify Email:** Fixed a syntax error related to `AuthOverlayCard` usage.
+*   **(auth)/layout.tsx:**
+    *   Increased right panel top padding (`pt-16 md:pt-24`).
+    *   Aligned content to the top (`justify-start`).
+    *   Increased max content width to `max-w-lg`.
+*   **Linting & Formatting:**
+    *   Corrected `eslint.config.mjs` to properly ignore build and metadata directories (`.next/`, `.imdone/`, `public/plans/.imdone/`) and removed unsupported `.eslintignore`.
+    *   Resolved various lint errors (unescaped entities, anonymous default exports, self-closing component tags).
+    *   Formatted the codebase using Prettier.
+*   **Task Tracker:**
+    *   Updated `AcademiaLens_Task_Tracker.md` to mark authentication UI tasks (T-700, T-701) as complete, reflecting the styling and layout enhancements.
+
+
 ### 2025-06-03: Authentication & UI Overhaul
 - Complete authentication flow with login, signup, and password reset
 - Responsive landing page with modern UI components

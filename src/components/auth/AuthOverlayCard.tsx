@@ -24,7 +24,7 @@ export function AuthOverlayCard({
   children,
 }: AuthOverlayCardProps) {
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-10 text-center">
+    <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto bg-card text-card-foreground rounded-2xl shadow-lg p-10 text-center">
       <div className="flex flex-col items-center gap-4 w-full">
         <Image
           src={imageSrc}

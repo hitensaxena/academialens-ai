@@ -67,7 +67,7 @@ export function ForgotPasswordDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] p-8 bg-white rounded-lg shadow-xl">
+      <DialogContent className="sm:max-w-[425px] p-8 rounded-lg shadow-xl">
         <DialogHeader className="mb-6">
           <DialogTitle className="text-2xl font-semibold text-center text-figmaText-heading">
             Reset Your Password

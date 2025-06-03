@@ -64,24 +64,24 @@ const config: Config = {
           },
         },
         formInput: {
-          bg: '#FFFFFF',
-          border: '#E2E8F0',
-          placeholder: '#94A3B8',
-          text: '#1E293B',
+          bg: 'hsl(var(--form-input-bg, var(--card)))', // Fallback to --card if --form-input-bg is not defined
+          border: 'hsl(var(--form-input-border, var(--border)))',
+          placeholder: 'hsl(var(--form-input-placeholder, var(--muted-foreground)))',
+          text: 'hsl(var(--form-input-text, var(--card-foreground)))',
         },
         link: {
           DEFAULT: '#2563EB',
           hover: '#1D4ED8',
         },
         figmaText: {
-          heading: '#1E293B',
-          subheading: '#64748B',
-          label: '#334155',
-          DEFAULT: '#334155', // Default body text
+          heading: 'hsl(var(--text-heading, var(--foreground)))', // Fallback to --foreground
+          subheading: 'hsl(var(--text-subheading, var(--muted-foreground)))', // Fallback to --muted-foreground
+          label: 'hsl(var(--text-label, var(--foreground)))',
+          DEFAULT: 'hsl(var(--text-body, var(--foreground)))', // Default body text
         },
         googleButton: {
-          border: '#CBD5E1',
-          text: '#334155',
+          border: 'hsl(var(--google-button-border, var(--border)))',
+          text: 'hsl(var(--google-button-text, var(--foreground)))',
         },
         // Figma Colors End
       },

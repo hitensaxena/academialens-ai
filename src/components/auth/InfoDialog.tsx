@@ -41,7 +41,7 @@ export function InfoDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] p-8 bg-white rounded-lg shadow-xl text-center">
+      <DialogContent className="sm:max-w-[425px] p-8 rounded-lg shadow-xl text-center">
         <DialogHeader className="mb-6">
           {iconSrc && (
             <div className="mx-auto mb-6 h-20 w-20 relative">

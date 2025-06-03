@@ -36,12 +36,27 @@
     --success: 142 71% 45%;
     --warning: 38 92% 50%;
     --error: 0 84% 60%;
+
+    /* Custom variables for auth forms and text */
+    --form-input-bg: 0 0% 100%; /* white */
+    --form-input-border: 240 6% 90%; /* light gray */
+    --form-input-placeholder: 240 4% 65%; /* medium-light gray */
+    --form-input-text: 240 10% 4%; /* dark text */
+
+    --text-heading: 240 10% 4%; /* dark, same as foreground */
+    --text-subheading: 240 4% 46%; /* medium gray, same as muted-foreground */
+    --text-label: 240 10% 4%; /* dark, for labels on light forms */
+    --text-body: 240 10% 4%; /* dark, same as foreground */
+
+    --google-button-bg: 0 0% 100%; /* white */
+    --google-button-border: 240 6% 85%; /* distinct light gray */
+    --google-button-text: 240 8% 25%; /* dark gray text */
   }
 
   .dark {
     --background: 240 10% 4%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 4%;
+    --card: 240 7% 10%; /* Adjusted for lighter card in dark mode */
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 4%;
     --popover-foreground: 0 0% 98%;
@@ -58,6 +73,24 @@
     --border: 240 4% 24%;
     --input: 240 4% 24%;
     --ring: 240 5% 80%;
+
+    /* Custom variables for auth forms and text in dark mode */
+    /* Form inputs are now dark-themed */
+    --form-input-bg: hsl(var(--input)); /* Use existing --input: 240 4% 24% */
+    --form-input-border: 240 4% 35%; /* Slightly lighter than input bg for subtle definition */
+    --form-input-placeholder: hsl(var(--muted-foreground)); /* Use existing --muted-foreground: 240 5% 65% */
+    --form-input-text: hsl(var(--foreground)); /* Use existing --foreground: 0 0% 98% */
+
+    /* Text outside forms adapts to dark background */
+    --text-heading: hsl(var(--foreground)); /* light, same as .dark foreground */
+    --text-subheading: hsl(var(--muted-foreground)); /* Use existing --muted-foreground: 240 5% 65% */
+    --text-label: hsl(var(--foreground)); /* light text for labels on dark forms */
+    --text-body: hsl(var(--foreground)); /* light, same as .dark foreground */
+
+    /* Google button remains light-themed for contrast */
+    --google-button-bg: 0 0% 100%; /* white */
+    --google-button-border: 240 6% 85%; /* distinct light gray */
+    --google-button-text: 240 8% 25%; /* dark gray text */
   }
 }
 

@@ -9,6 +9,23 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends('next/core-web-vitals', 'next/typescript')];
+// Original configuration
+const baseConfig = [...compat.extends('next/core-web-vitals', 'next/typescript')];
+
+// Add ignores to the configuration
+const eslintConfig = [
+  ...baseConfig,
+  {
+    ignores: [
+      ".next/",
+      ".imdone/",
+      "public/plans/.imdone/",
+      "node_modules/", // Good practice to explicitly ignore node_modules here too
+      "dist/",
+      "build/",
+      "out/"
+    ]
+  }
+];
 
 export default eslintConfig;

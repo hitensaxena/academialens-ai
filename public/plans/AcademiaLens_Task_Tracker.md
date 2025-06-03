@@ -55,14 +55,15 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 ### Frontend Development
 
 #### Authentication Screens Revamp
-- [ ] **T-700** Authentication UI Implementation
-  - [ ] **T-701** Create Login Screen 👤 FE1 📅 2025-06-05
-    - [ ] Implement email/password form
-    - [ ] Add social login buttons
-    - [ ] Add "Forgot Password" link
-    - [ ] Add "Create Account" link
-    - [ ] Implement form validation
-    - [ ] Add loading states
+- [x] **T-700** Authentication UI Implementation ✅
+  - [x] **T-701** Create Login, Signup, Forgot Password, Reset Success Screens 👤 FE1 📅 2025-06-05 ✅
+    - [x] Implement email/password forms (Login, Signup, Forgot Password)
+    - [x] Add social login buttons (Google styled, functionality pending)
+    - [x] Add "Forgot Password" link
+    - [x] Add "Create Account" / "Login Now" links
+    - [x] Implement form validation (via react-hook-form & Zod)
+    - [x] Add loading states (buttons disable, show spinner)
+    - [x] Pixel-perfect styling for all auth screens (Login, Signup, Forgot Password, Reset Success) based on Figma designs, including colors, typography, spacing, and layout. Ensured consistent card dimensions and styling.
   - [x] **T-705** Shared Authentication Components 👤 FE3 📅 2025-06-08 ✅
     - [x] Create AuthLayout component
     - [x] Implement form input components

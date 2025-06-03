@@ -127,14 +127,14 @@ function ResetPasswordForm() {
   }
 
   return (
-    <>
-      <div className="w-full max-w-md space-y-6 rounded-lg bg-card p-8 shadow-lg sm:p-10">
-        <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Set new password</h1>
-          <p className="text-sm text-muted-foreground">
-            Your new password must be different from previous used passwords.
-          </p>
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">
+          Reset Password
+        </h1>
+        <p className="text-lg text-center text-muted-foreground">Enter your new password below</p>
+      </div>
+      <div className="w-full max-w-md rounded-2xl bg-card text-card-foreground p-8 shadow-xl">
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4">
@@ -217,7 +217,7 @@ function ResetPasswordForm() {
           Sign in
         </Link>
       </p>
-    </>
+    </div>
   );
 }
 
