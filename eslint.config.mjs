@@ -17,15 +17,15 @@ const eslintConfig = [
   ...baseConfig,
   {
     ignores: [
-      ".next/",
-      ".imdone/",
-      "public/plans/.imdone/",
-      "node_modules/", // Good practice to explicitly ignore node_modules here too
-      "dist/",
-      "build/",
-      "out/"
-    ]
-  }
+      '.next/',
+      '.imdone/',
+      'public/plans/.imdone/',
+      'node_modules/', // Good practice to explicitly ignore node_modules here too
+      'dist/',
+      'build/',
+      'out/',
+    ],
+  },
 ];
 
 export default eslintConfig;

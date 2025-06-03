@@ -7,13 +7,13 @@ Base = declarative_base()
 # Example:
 # from sqlalchemy import Column, Integer, DateTime
 # from datetime import datetime
-# 
+#
 # class BaseModel(Base):
-#     __abstract__ = True  # This makes SQLAlchemy not create a table for BaseModel
-# 
+#     __abstract__ = True  # SQLAlchemy won't create a table for BaseModel
+#
 #     id = Column(Integer, primary_key=True, index=True)
 #     created_at = Column(DateTime, default=datetime.utcnow)
-#     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+#     updated_at = Column(DateTime, default=utcnow, onupdate=utcnow)
 #
-# Then your models would inherit from BaseModel instead of Base directly.
+# Models would then inherit from BaseModel, not Base.
 # For now, we'll keep it simple with just `Base = declarative_base()`.

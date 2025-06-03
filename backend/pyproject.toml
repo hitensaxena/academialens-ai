@@ -11,14 +11,16 @@ python = "^3.10"
 fastapi = "^0.110.0" # Using a recent version, adjust if needed
 uvicorn = {extras = ["standard"], version = "^0.27.1"}
 pydantic = {extras = ["email"], version = "^2.6.1"}
+pydantic-settings = "^2.1.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-dotenv = "^1.0.0"
 SQLAlchemy = "^2.0.25"
 psycopg2-binary = "^2.9.9" # For PostgreSQL connection
 alembic = "^1.13.1" # For database migrations
-python-jose = {extras = ["cryptography"], version = "^3.3.0"} # For JWT
-passlib = {extras = ["bcrypt"], version = "^1.7.4"} # For password hashing
 tenacity = "^8.2.3" # For retrying operations (e.g., DB connection)
 greenlet = "^3.0.3" # Often a dependency for SQLAlchemy async or gevent
+python-multipart = "^0.0.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"

@@ -33,7 +33,7 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
 
 ### Frontend
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-- **Styling**: 
+- **Styling**:
   - [Tailwind CSS v4](https://tailwindcss.com/) with modern syntax
   - [shadcn/ui](https://ui.shadcn.com/) components
   - CSS Modules
@@ -96,10 +96,10 @@ AcademiaLens is an AI-powered research assistant that helps researchers, student
    ```bash
    # In the root directory
    npm run dev
-   
+
    # In a new terminal, run Storybook
    npm run storybook
-   
+
    # In another terminal, from the backend directory
    cd backend
    poetry run uvicorn app.main:app --reload
@@ -193,6 +193,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 
 ## 🚀 Recent Updates (June 2025)
+
+### 2025-06-05: Backend CORS Configuration Fix
+- 🛠️ Fixed CORS issues in FastAPI backend preventing frontend login
+- 🔧 Updated CORS middleware configuration with proper headers
+- 🌐 Added support for Netlify deployment domain
+- 🧹 Corrected environment variable parsing for CORS origins
+- 🧪 Verified backend returns proper CORS headers for login endpoint
 
 ### 2025-06-04: Auth Screens Pixel-Perfect Styling & Refinements
 *   **Unified Auth Screen Styling:**

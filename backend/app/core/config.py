@@ -1,11 +1,17 @@
 import logging
-from typing import List, Union, Optional
+from typing import Any, List, Optional
 
-from pydantic import AnyHttpUrl, PostgresDsn, field_validator
+from pydantic import PostgresDsn, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding='utf-8', extra='ignore')
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        case_sensitive=True,
+    )
 
     PROJECT_NAME: str = "AcademiaLens Backend"
     API_V1_STR: str = "/api/v1"
@@ -13,17 +19,18 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: str = "INFO"
 
-    # CORS
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    # CORS - Accept string format from .env
+    BACKEND_CORS_ORIGINS: List[str] = []
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",")]
-        elif isinstance(v, (list, str)):
+    def parse_cors_origins(cls, v) -> List[str]:
+        if isinstance(v, str):
+            # Handle comma-separated string
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        if isinstance(v, list):
             return v
-        raise ValueError(v)
+        return []
 
     # Database
     POSTGRES_SERVER: str
@@ -43,31 +50,34 @@ class Settings(BaseSettings):
         # For Pydantic v1, values was a dict. Adjust if using Pydantic v1.
         # Assuming Pydantic v2, use values.data
         # However, the validator signature for Pydantic v2 with field_validator
-        # should be `def assemble_db_connection(cls, v: Optional[str], info: FieldValidationInfo) -> Any:`
+        # Pydantic v2: def assemble_db_connection(
+        #   cls, v: Optional[str], info: FieldValidationInfo
+        # ) -> Any:
         # and then use `info.data`
-        # For simplicity with current Pydantic settings, let's assume direct construction if not provided.
-        # This part might need adjustment based on the exact Pydantic version and how `values` is passed.
+        # For simplicity, assume direct construction if not provided.
+        # May need adjustment based on Pydantic version & `values`.
         # A common pattern is to construct it if not explicitly set.
-        # For now, we'll rely on it being set in .env or constructed there directly.
-        # If POSTGRES_USER etc. are present, it implies DATABASE_URL should be constructible.
-        # This validator is more of a placeholder if DATABASE_URL isn't directly in .env
+        # For now, rely on it being set in .env or constructed there.
+        # If PG vars exist, DATABASE_URL should be constructible.
+        # Placeholder if DATABASE_URL isn't directly in .env
         # A more robust approach for Pydantic v2:
         # from pydantic import model_validator
         # @model_validator(mode='after')
         # def assemble_db_connection_auto(self) -> 'Settings':
         #     if not self.DATABASE_URL and all([
-        #         self.POSTGRES_SERVER, self.POSTGRES_USER, self.POSTGRES_PASSWORD, self.POSTGRES_DB
+        #         POSTGRES_SERVER, POSTGRES_USER,
+        #         self.POSTGRES_PASSWORD, self.POSTGRES_DB
         #     ]):
-        #         self.DATABASE_URL = PostgresDsn.build(
+        #         self.DATABASE_URL = (
         #             scheme="postgresql",
         #             username=self.POSTGRES_USER,
         #             password=self.POSTGRES_PASSWORD,
         #             host=self.POSTGRES_SERVER,
         #             port=int(self.POSTGRES_PORT),
-        #             path=f"/{self.POSTGRES_DB}",
+        #             path=f"/{self.POSTGRES_DB}",  # Construct path
         #         )
         #     return self
-        return v # Return v as is, assuming DATABASE_URL is set in .env or will be handled by a model_validator
+        return v  # Return v; DB_URL assumed set in .env or by validator
 
     # JWT Authentication
     SECRET_KEY: str
@@ -79,13 +89,12 @@ class Settings(BaseSettings):
     FIRST_SUPERUSER_EMAIL: Optional[str] = None
     FIRST_SUPERUSER_PASSWORD: Optional[str] = None
 
-    class Config:
-        case_sensitive = True
-        env_file = ".env"
-        extra = "ignore"
 
 settings = Settings()
 
 # Configure logging based on settings
 logging.basicConfig(level=settings.LOG_LEVEL.upper())
 logger = logging.getLogger(settings.PROJECT_NAME)
+
+# Log the parsed CORS settings
+logger.info(f"Configured BACKEND_CORS_ORIGINS: " f"{settings.BACKEND_CORS_ORIGINS}")

@@ -3,8 +3,10 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
+
 class HealthCheck(BaseModel):
     status: str = "OK"
+
 
 @router.get("/health", response_model=HealthCheck, tags=["health"])
 def read_health():
