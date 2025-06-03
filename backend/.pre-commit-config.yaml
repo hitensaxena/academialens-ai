@@ -1,0 +1,45 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0 # Use a recent version
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: detect-private-key
+
+  - repo: https://github.com/psf/black
+    rev: 23.12.1 # Match version in pyproject.toml
+    hooks:
+      - id: black
+        args: [--line-length=88] # Ensure consistency with pyproject.toml
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2 # Match version in pyproject.toml
+    hooks:
+      - id: isort
+        args: ["--profile", "black", "--line-length=88"]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0 # Match version in pyproject.toml
+    hooks:
+      - id: flake8
+        additional_dependencies: # Add flake8 plugins if needed
+          # - flake8-bugbear
+          # - flake8-comprehensions
+          # - flake8-print
+        args:
+          - "--max-line-length=88"
+          - "--ignore=E203,W503" # E203: whitespace before ':', W503: line break before binary operator (black handles these)
+
+  # Optional: Mypy for static type checking
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: 'v1.8.0' # Match version in pyproject.toml
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies: ["pydantic>=1.8"]
+  #       # exclude: "^tests/" # Optionally exclude test files if they are not fully typed
+  #       args: [--ignore-missing-imports]

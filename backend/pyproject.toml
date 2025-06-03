@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "academialens-backend"
+version = "0.1.0"
+description = "Backend for AcademiaLens"
+authors = ["Hiten Saxena <developerhiten@gmail.com>"] # Please replace with your details
+readme = "README.md"
+packages = [{include = "app", from = "."}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110.0" # Using a recent version, adjust if needed
+uvicorn = {extras = ["standard"], version = "^0.27.1"}
+pydantic = {extras = ["email"], version = "^2.6.1"}
+python-dotenv = "^1.0.0"
+SQLAlchemy = "^2.0.25"
+psycopg2-binary = "^2.9.9" # For PostgreSQL connection
+alembic = "^1.13.1" # For database migrations
+python-jose = {extras = ["cryptography"], version = "^3.3.0"} # For JWT
+passlib = {extras = ["bcrypt"], version = "^1.7.4"} # For password hashing
+tenacity = "^8.2.3" # For retrying operations (e.g., DB connection)
+greenlet = "^3.0.3" # Often a dependency for SQLAlchemy async or gevent
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+black = "^23.12.1"
+isort = "^5.13.2"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+pre-commit = "^3.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Can be set to false for stricter checks
