@@ -1,15 +1,18 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { z } from 'zod';
 import Link from 'next/link';
+
 import { Button } from '@/components/ui/button/button';
 import { Input } from '@/components/ui/input/input';
+import { Icons } from '@/components/icons';
 import { Label } from '@/components/ui/label/label';
 import { Checkbox } from '@/components/ui/checkbox/checkbox';
-import { useToast } from '@/components/ui/use-toast';
 
 const signupSchema = z
   .object({
@@ -36,11 +39,14 @@ type SignupFormData = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
   const router = useRouter();
-  const { toast } = useToast();
+  // Toast functionality can be added here if needed
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setValue, // To set checkbox value
     formState: { errors, isSubmitting },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -53,124 +59,196 @@ export default function SignupPage() {
     },
   });
 
-  const onSubmit = async (data: SignupFormData) => {
+  const onSubmit = async () => {
     try {
-      // TODO: Replace with actual API call
-      console.log('Signup data:', data);
-
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Show success message
-      toast({
-        title: 'Account created!',
-        description: 'Please check your email to verify your account.',
-      });
-
-      // Redirect to login
-      router.push('/login');
-    } catch (error) {
-      console.error('Signup error:', error);
-      toast({
-        title: 'Error',
-        description: 'An error occurred while creating your account. Please try again.',
-        variant: 'destructive',
-      });
+      // Redirect to verify email page
+      router.push('/verify-email');
+    } catch (err) {
+      console.error('Error during sign up:', err);
+      // In a real app, you would show this error to the user
+      console.error('An error occurred while creating your account. Please try again.');
     }
   };
 
   return (
-    <div className="grid gap-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              placeholder="John Doe"
-              {...register('name')}
-              error={errors.name?.message}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              {...register('email')}
-              error={errors.email?.message}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              {...register('password')}
-              error={errors.password?.message}
-            />
-            <p className="text-xs text-muted-foreground">
-              Must be at least 8 characters with uppercase, lowercase, number, and special character
-            </p>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              placeholder="••••••••"
-              {...register('confirmPassword')}
-              error={errors.confirmPassword?.message}
-            />
-          </div>
-          <div className="flex items-start space-x-2">
-            <Checkbox id="terms" {...register('terms')} />
-            <div className="grid gap-1.5 leading-none">
-              <Label htmlFor="terms" className="text-sm font-medium leading-none">
-                I agree to the{' '}
-                <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
-                  Privacy Policy
-                </Link>
+    <>
+      {/* Create Your Account Heading & Subheading - MOVED OUTSIDE AND ABOVE THE CARD */}
+      <div className="text-left space-y-1 mb-6 sm:mb-8">
+        <h2 className="text-2xl font-bold text-figmaText-heading">Create Your Account</h2>
+        <p className="text-sm text-figmaText-subheading">
+          Provide us details to create a new account
+        </p>
+      </div>
+
+      {/* Main card container for form elements */}
+      <div className="bg-white p-10 rounded-2xl shadow-lg w-full">
+        <div className="w-full max-w-[360px] mx-auto space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Full Name Input */}
+            <div>
+              <Label htmlFor="name" className="block text-sm font-medium text-figmaText-label mb-1">
+                Full Name
               </Label>
-              {errors.terms && (
-                <p className="text-sm font-medium text-destructive">{errors.terms.message}</p>
+              <Input
+                id="name"
+                placeholder="Your Name"
+                className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.name ? 'border-red-500' : ''}`}
+                {...register('name')}
+                disabled={isSubmitting}
+              />
+              {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <Label
+                htmlFor="email"
+                className="block text-sm font-medium text-figmaText-label mb-1"
+              >
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Your Email Address"
+                className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
+                {...register('email')}
+                disabled={isSubmitting}
+              />
+              {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
+            </div>
+
+            {/* Password Input */}
+            <div>
+              <Label
+                htmlFor="password"
+                className="block text-sm font-medium text-figmaText-label mb-1"
+              >
+                Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Create a new password"
+                  className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  {...register('password')}
+                  disabled={isSubmitting}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-500"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  disabled={isSubmitting}
+                >
+                  {showPassword ? (
+                    <Icons.eyeOff className="h-5 w-5" />
+                  ) : (
+                    <Icons.eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              {errors.password && (
+                <p className="mt-1 text-xs text-red-600">{errors.password.message}</p>
               )}
             </div>
+
+            {/* Confirm Password Input */}
+            <div>
+              <Label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-figmaText-label mb-1"
+              >
+                Confirm Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="Confirm password"
+                  className={`w-full px-4 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                  {...register('confirmPassword')}
+                  disabled={isSubmitting}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-500"
+                  aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                  disabled={isSubmitting}
+                >
+                  {showConfirmPassword ? (
+                    <Icons.eyeOff className="h-5 w-5" />
+                  ) : (
+                    <Icons.eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              {errors.confirmPassword && (
+                <p className="mt-1 text-xs text-red-600">{errors.confirmPassword.message}</p>
+              )}
+            </div>
+
+            {/* Terms Checkbox */}
+            <div className="flex items-start space-x-2 pt-1">
+              <Checkbox
+                id="terms"
+                className="mt-0.5 h-4 w-4 rounded border-googleButton-border text-link-DEFAULT focus:ring-link-DEFAULT"
+                {...register('terms')}
+                onCheckedChange={(checked) =>
+                  setValue('terms', checked as boolean, { shouldValidate: true })
+                }
+              />
+              <div className="grid gap-1.5 leading-none">
+                <Label htmlFor="terms" className="text-sm font-normal text-figmaText-label">
+                  I agree to the{' '}
+                  <Link
+                    href="/terms"
+                    className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
+                  >
+                    Terms of Service
+                  </Link>{' '}
+                  and{' '}
+                  <Link
+                    href="/privacy"
+                    className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
+                  >
+                    Privacy Policy
+                  </Link>
+                </Label>
+                {errors.terms && <p className="text-xs text-red-600">{errors.terms.message}</p>}
+              </div>
+            </div>
+
+            {/* Sign Up Button */}
+            <div className="pt-1">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 flex items-center justify-center rounded-md bg-gradient-to-r from-brand-green-light to-brand-green-dark px-4 text-sm font-semibold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-green-dark focus:ring-offset-2 disabled:opacity-50 transition-opacity"
+              >
+                {isSubmitting ? <Icons.loader className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Sign Up
+              </Button>
+            </div>
+          </form>
+
+          {/* Login Link */}
+          <div className="text-center text-sm text-figmaText-subheading pt-2">
+            Already Have An Account?{' '}
+            <Link
+              href="/login"
+              className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
+            >
+              Login Now
+            </Link>
           </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Creating account...' : 'Create Account'}
-          </Button>
-        </div>
-      </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled>
-        <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
-          <path
-            d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.884-1.656-4.397-2.647-6.735-2.647-5.458 0-9.881 4.423-9.881 9.881s4.423 9.881 9.881 9.881c5.458 0 9.881-4.423 9.881-9.881 0-0.599-0.054-1.188-0.158-1.761h-9.723z"
-            fill="currentColor"
-          />
-        </svg>
-        Google (Coming Soon)
-      </Button>
-      <p className="px-8 text-center text-sm text-muted-foreground">
-        Already have an account?{' '}
-        <Link href="/login" className="underline underline-offset-4 hover:text-primary">
-          Sign in
-        </Link>
-      </p>
-    </div>
+    </>
   );
 }

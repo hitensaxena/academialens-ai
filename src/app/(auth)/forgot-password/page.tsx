@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +10,7 @@ import { Button } from '@/components/ui/button/button';
 import { Input } from '@/components/ui/input/input';
 import { Label } from '@/components/ui/label/label';
 import { useToast } from '@/components/ui/use-toast';
+import { Icons } from '@/components';
 
 const forgotPasswordSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -19,11 +21,12 @@ type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
@@ -31,22 +34,19 @@ export default function ForgotPasswordPage() {
     },
   });
 
-  const onSubmit = async (data: ForgotPasswordFormData) => {
+  const onSubmit = async (formData: ForgotPasswordFormData) => {
+    setIsLoading(true);
     try {
-      // TODO: Replace with actual API call
-      console.log('Forgot password data:', data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Show success message
-      toast({
-        title: 'Check your email',
-        description: "We've sent you a link to reset your password.",
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email }),
       });
-
-      // Redirect to login
-      router.push('/login');
+      await response.json();
+      // Handle success (show success message)
+      console.log('Password reset email sent');
+      // Redirect to the email sent confirmation page
+      router.push('/reset-password-email-sent');
     } catch (error) {
       console.error('Forgot password error:', error);
       toast({
@@ -54,39 +54,62 @@ export default function ForgotPasswordPage() {
         description: 'An error occurred. Please try again.',
         variant: 'destructive',
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="grid gap-6">
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Forgot your password?</h1>
-        <p className="text-sm text-muted-foreground">
-          Enter your email address and we&apos;ll send you a link to reset your password.
-        </p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              {...register('email')}
-              error={errors.email?.message}
-            />
-          </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Reset Link'}
-          </Button>
+    <>
+      <div className="w-full max-w-md space-y-6 rounded-lg bg-card p-8 shadow-lg sm:p-10">
+        <div className="text-center space-y-2">
+          <h1 className="text-2xl font-semibold tracking-tight">Forgot your password?</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Don&apos;t have an account? Email and we&apos;ll send you a link to reset your password
+          </p>
         </div>
-      </form>
-      <p className="px-8 text-center text-sm text-muted-foreground">
-        <Link href="/login" className="underline underline-offset-4 hover:text-primary">
-          Back to sign in
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Icons.mail className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                className="pl-10 h-12"
+                {...register('email')}
+                error={errors.email?.message}
+                disabled={isLoading}
+              />
+            </div>
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full bg-primary-accent hover:bg-primary-accent/90 h-12 text-white"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Icons.loader className="mr-2 h-4 w-4 animate-spin" />
+                Sending reset link...
+              </>
+            ) : (
+              'Send Reset Link'
+            )}
+          </Button>
+        </form>
+      </div>
+      <p className="mt-8 text-center text-sm text-muted-foreground">
+        Remember your password?{' '}
+        <Link href="/login" className="font-medium text-primary-accent hover:underline">
+          Sign in
         </Link>
       </p>
-    </div>
+    </>
   );
 }

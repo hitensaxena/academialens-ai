@@ -17,6 +17,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'], // Set Inter as primary sans-serif
+        mono: ['var(--font-geist-mono)', 'monospace'], // Keep Geist Mono or update if needed
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -51,6 +55,35 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // Figma Colors Start
+        brand: {
+          green: {
+            light: '#94EA6C',
+            DEFAULT: '#70C945', // A mid-point, can be used if only one green is needed
+            dark: '#60B83A',
+          },
+        },
+        formInput: {
+          bg: '#FFFFFF',
+          border: '#E2E8F0',
+          placeholder: '#94A3B8',
+          text: '#1E293B',
+        },
+        link: {
+          DEFAULT: '#2563EB',
+          hover: '#1D4ED8',
+        },
+        figmaText: {
+          heading: '#1E293B',
+          subheading: '#64748B',
+          label: '#334155',
+          DEFAULT: '#334155', // Default body text
+        },
+        googleButton: {
+          border: '#CBD5E1',
+          text: '#334155',
+        },
+        // Figma Colors End
       },
       borderRadius: {
         lg: 'var(--radius)',

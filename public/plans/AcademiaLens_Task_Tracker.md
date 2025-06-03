@@ -54,6 +54,43 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 ### Frontend Development
 
+#### Authentication Screens Revamp
+- [ ] **T-700** Authentication UI Implementation
+  - [ ] **T-701** Create Login Screen 👤 FE1 📅 2025-06-05
+    - [ ] Implement email/password form
+    - [ ] Add social login buttons
+    - [ ] Add "Forgot Password" link
+    - [ ] Add "Create Account" link
+    - [ ] Implement form validation
+    - [ ] Add loading states
+  - [x] **T-705** Shared Authentication Components 👤 FE3 📅 2025-06-08 ✅
+    - [x] Create AuthLayout component
+    - [x] Implement form input components
+    - [x] Create social login buttons
+    - [x] Add loading spinners
+    - [x] Implement error message components
+    - [x] Add form validation messages
+    - [x] Create password strength indicator
+  - [x] **T-706** Authentication State Management 👤 FE1 📅 2025-06-09 ✅
+    - [x] Implement auth context/provider
+    - [x] Add user session management
+    - [x] Implement protected routes
+    - [x] Add auth state persistence
+    - [x] Handle authentication errors
+    - [x] Add loading states during auth operations
+  - [x] **T-707** Testing 👤 QA1 📅 2025-06-10 ✅
+    - [x] Write unit tests for auth components
+    - [x] Add integration tests for auth flow
+    - [x] Test error scenarios
+    - [x] Test responsive behavior
+    - [ ] Add end-to-end tests
+    - [ ] Test cross-browser compatibility
+  - [x] **T-708** Documentation 👤 FE1 📅 2025-06-10 ✅
+    - [x] Update component documentation
+    - [x] Add auth flow diagrams
+    - [x] Document error handling
+    - [x] Update API integration docs
+
 #### Project Setup (Frontend)
 - [x] **T-100** Create new Next.js 14+ project with TypeScript template ✅ 2025-06-02
   - [x] **T-101** Configure `next.config.js` with necessary plugins 👤 FE1 ✅ 2025-06-02

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button/button';
 import { useToast } from '@/components/ui/use-toast';
 import Link from 'next/link';
+import { AuthOverlayCard } from '@/components/auth/AuthOverlayCard';
 
 function VerifyEmailContent() {
   const searchParams = useSearchParams();
@@ -35,16 +36,7 @@ function VerifyEmailContent() {
         // Simulate success response
         setStatus('success');
         setMessage('Your email has been successfully verified!');
-
-        toast({
-          title: 'Email verified!',
-          description: 'Your email has been successfully verified.',
-        });
-
-        // Redirect to login after a short delay
-        setTimeout(() => {
-          router.push('/login');
-        }, 3000);
+        // No automatic redirect or toast, AuthOverlayCard will handle this
       } catch (error) {
         console.error('Email verification error:', error);
         setStatus('error');
@@ -56,39 +48,40 @@ function VerifyEmailContent() {
   }, [searchParams, router, toast]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-8 text-card-foreground shadow-sm">
-        <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-bold tracking-tight">
-            {status === 'verifying' && 'Verifying Your Email'}
-            {status === 'success' && 'Email Verified'}
-            {status === 'error' && 'Verification Failed'}
-          </h1>
-          <p className="text-sm text-muted-foreground">{message}</p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-authLayout-bg p-4">
+      {status === 'success' ? (
+        <AuthOverlayCard
+          title="Email Verified!"
+          subtitle="Your email has been successfully verified."
+          description="You can now use all the features of AcademiaLens."
+          actionLabel="Go to Login"
+          actionHref="/login"
+        />
+      ) : (
+        <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-8 text-card-foreground shadow-sm">
+          <div className="space-y-2 text-center">
+            <h1 className="text-2xl font-bold tracking-tight">
+              {status === 'verifying' && 'Verifying Your Email'}
+              {status === 'error' && 'Verification Failed'}
+            </h1>
+            <p className="text-sm text-muted-foreground">{message}</p>
+          </div>
+
+          {status === 'verifying' && (
+            <div className="flex justify-center py-4">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div className="pt-4">
+              <Button className="w-full" asChild>
+                <Link href="/signup">Back to Sign Up</Link>
+              </Button>
+            </div>
+          )}
         </div>
-
-        {status === 'verifying' && (
-          <div className="flex justify-center py-4">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-          </div>
-        )}
-
-        {status === 'error' && (
-          <div className="pt-4">
-            <Button className="w-full" asChild>
-              <Link href="/signup">Back to Sign Up</Link>
-            </Button>
-          </div>
-        )}
-
-        {status === 'success' && (
-          <div className="pt-4">
-            <p className="text-center text-sm text-muted-foreground">
-              Redirecting to login page...
-            </p>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

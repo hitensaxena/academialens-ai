@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button/button';
 import { Input } from '@/components/ui/input/input';
 import { Label } from '@/components/ui/label/label';
 import { useToast } from '@/components/ui/use-toast';
+import { Icons } from '@/components';
 
 const resetPasswordSchema = z
   .object({
@@ -36,6 +37,8 @@ function ResetPasswordForm() {
   const [token, setToken] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -87,14 +90,8 @@ function ResetPasswordForm() {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Show success message
-      toast({
-        title: 'Password updated!',
-        description: 'Your password has been successfully reset.',
-      });
-
-      // Redirect to login
-      router.push('/login');
+      // Redirect to password reset success page
+      router.push('/reset-password-success');
     } catch (error) {
       console.error('Reset password error:', error);
       toast({
@@ -130,60 +127,97 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+    <>
+      <div className="w-full max-w-md space-y-6 rounded-lg bg-card p-8 shadow-lg sm:p-10">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Reset Password</h1>
-          <p className="text-sm text-muted-foreground">Enter your new password below</p>
+          <h1 className="text-2xl font-semibold tracking-tight">Set new password</h1>
+          <p className="text-sm text-muted-foreground">
+            Your new password must be different from previous used passwords.
+          </p>
         </div>
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="password">New Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  {...register('password')}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="••••••••"
+                    className="h-12 pr-10"
+                    {...register('password')}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <Icons.eyeOff className="h-4 w-4" />
+                    ) : (
+                      <Icons.eye className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
                 {errors.password && (
                   <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="••••••••"
-                  {...register('confirmPassword')}
-                />
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="••••••••"
+                    className="h-12 pr-10"
+                    {...register('confirmPassword')}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? (
+                      <Icons.eyeOff className="h-4 w-4" />
+                    ) : (
+                      <Icons.eye className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
                 {errors.confirmPassword && (
                   <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
                 )}
               </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Resetting...' : 'Reset Password'}
+              <Button
+                type="submit"
+                className="w-full bg-primary-accent hover:bg-primary-accent/90 h-12 text-white"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Icons.loader className="mr-2 h-4 w-4 animate-spin" /> Resetting...
+                  </>
+                ) : (
+                  'Reset Password'
+                )}
               </Button>
             </div>
           </form>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                Remember your password?
-              </span>
-            </div>
-          </div>
-          <Button variant="outline" asChild>
-            <Link href="/login">Sign in</Link>
-          </Button>
         </div>
       </div>
-    </div>
+      <p className="mt-8 text-center text-sm text-muted-foreground">
+        Remember your password?{' '}
+        <Link href="/login" className="font-medium text-primary-accent hover:underline">
+          Sign in
+        </Link>
+      </p>
+    </>
   );
 }
 
