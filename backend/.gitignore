@@ -17,7 +17,7 @@ ENV/
 MANIFEST
 
 # Poetry
-poetry.lock
+
 
 # IDEs and editors
 .vscode/

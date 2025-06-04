@@ -13,6 +13,7 @@ uvicorn = {extras = ["standard"], version = "^0.27.1"}
 pydantic = {extras = ["email"], version = "^2.6.1"}
 pydantic-settings = "^2.1.0"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+bcrypt = "4.0.1" # Pinned for passlib 1.7.4 compatibility
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-dotenv = "^1.0.0"
 SQLAlchemy = "^2.0.25"
