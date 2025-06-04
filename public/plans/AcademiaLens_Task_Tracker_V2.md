@@ -98,7 +98,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 | Security Utilities (Backend)    | `backend/app/core/security.py`                                              | BE Team          | ✅ Completed    | JWT creation/validation, Password Hashing         |
 | Logging Configuration           | `backend/app/core/logging_config.py` (planned)                              | BE Team / DevOps | ⏳ Pending      | Entire Backend Application                        |
 | CORS Configuration (Backend)    | `backend/app/main.py` (middleware setup)                                    | BE Team          | ✅ Completed    | FastAPI Application                               |
-| Husky Pre-commit Hooks          | `.husky/`                                                                   | Dev Team         | ✅ Completed    | Code linting/formatting before commits            |
+| Husky Pre-commit Hooks          | `.husky/`                                                                   | Dev Team         | ✅ Completed    | Code linting/formatting. Refined: Husky script updated (deprecated lines removed), lint-staged config path set. 👤 CS 📅 2025-06-04 |
 
 ---
 
@@ -119,6 +119,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-107** Configure Prettier with shared config 👤 FE2 ✅ 📅 2025-06-02
   - [x] **T-108** Add Husky for git hooks 👤 FE2 ✅ 📅 2025-06-02
   - [x] **T-109** Set up lint-staged for pre-commit checks 👤 FE2 ✅ 📅 2025-06-02
+    - *Note: Refined by explicitly setting `lint-staged` config path to `package.json` in Husky script to resolve warnings, and removed deprecated Husky script lines. 👤 CS 📅 2025-06-04*
 
 #### UI Component Library & Styling
 - [x] **T-110** UI Component Library & Styling ✅ 📅 2025-06-02
@@ -127,6 +128,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
   - [x] **T-113** Create base components (Button, Input, Form) 👤 FE3 ✅ 📅 2025-06-02
   - [x] **T-114** Implement responsive layout components 👤 FE3 ✅ 📅 2025-06-02
   - [x] **T-115** Set up global styles and CSS reset 👤 FE3 ✅ 📅 2025-06-02
+    - *Note: Fixed Tailwind CSS `@apply` warning in `globals.css` by using direct CSS property. 👤 CS 📅 2025-06-04*
     - Updated to use Tailwind v4 syntax with `@import "tailwindcss/preflight"`
     - Configured PostCSS with necessary plugins
   - [x] **T-129** Component Library Completion 👤 FE3 ✅ 📅 2025-06-03
@@ -301,6 +303,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 #### Linting & Formatting
 - [x] **T-507** Linting and Formatting Setup ✅ 📅 2025-06-03
   - [x] **T-508** Configure Flake8 or Ruff for linting 👤 BE1 ✅ 📅 2025-06-03
+    - *Note: Configured Flake8 for consistent line length (88 chars), ignored E203/W503, and per-file E501 for `crud_user.py`. 👤 CS 📅 2025-06-04*
   - [x] **T-509** Configure Black for code formatting 👤 BE1 ✅ 📅 2025-06-03
   - [x] **T-510** Add pre-commit hooks for linting and formatting 👤 BE1 ✅ 📅 2025-06-03
 
