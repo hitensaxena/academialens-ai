@@ -60,7 +60,7 @@
 
 @layer base {
   * {
-    @apply border-border; /* Apply default border color */
+    border-color: hsl(var(--border)); /* Apply default border color */
   }
   body {
     @apply bg-background text-foreground;
