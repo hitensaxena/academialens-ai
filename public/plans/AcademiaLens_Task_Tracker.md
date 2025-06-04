@@ -150,7 +150,10 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 - [x] **T-125** Documentation ✅ 2025-06-02
   - [x] **T-126** Add README with setup instructions 👤 FE1 ✅ 2025-06-02
-  - [ ] **T-127** Document component patterns 👤 FE3 📅 2025-06-12
+  - [ ] **T-127** Document component patterns & Integrate Storybook 👤 FE3 📅 2025-06-20
+    - [ ] **T-127.1** Integrate Storybook into the Next.js project 👤 FE_USER 📅 2025-06-22
+    - [ ] **T-127.2** Create comprehensive stories for each ui-kit component (demonstrating variants, states, props) 👤 FE_USER 📅 2025-06-28
+    - [ ] **T-127.3** Finalize documentation for all shared UI components 👤 FE_USER 📅 2025-06-30
   - [ ] **T-128** Create contribution guidelines 👤 FE1 📅 2025-06-12
   - [x] **T-129** Component Library Completion 👤 FE3 ✅ 2025-06-03
     - [x] **T-129.1** Core Form Components ✅ 2025-06-03
@@ -272,12 +275,29 @@ This document serves as a centralized task tracker for the AcademiaLens project,
     - [ ] Change password functionality
     - [ ] Notification preferences
   - [x] **T-221** Password change form 👤 FE6 ✅ 2025-06-03
+
+- [ ] **T-230** Dashboard Implementation & Core Navigation 👤 FE_TEAM 📅 2025-07-15
+  - [ ] **T-231** Design main dashboard structure & layout (high-fidelity mockups) 👤 UX_USER 📅 2025-06-18
+    - [ ] **T-231.1** Define key dashboard information/widgets (e.g., recent documents, quick search, basic stats) based on MVP scope 👤 PM_USER 📅 2025-06-15
+  - [ ] **T-232** Implement responsive main layout (Sidebar, Topbar, Content Area) using ui-kit components 👤 FE_USER 📅 2025-06-25
+    - [ ] **T-232.1** Ensure layout is responsive across mobile, tablet, and desktop breakpoints.
+    - [ ] **T-232.2** Implement interactive elements within navigation (e.g., user profile dropdown, settings link, logout).
+  - [ ] **T-233** Create placeholder content areas for dashboard widgets 👤 FE_USER 📅 2025-06-28
+    - [ ] **T-233.1** Identify and define API endpoints required for initial dashboard widgets (liaise with backend team).
+  - [ ] **T-234** Integrate basic routing for authenticated sections (e.g., /dashboard, /dashboard/documents, /dashboard/settings) 👤 FE_USER 📅 2025-07-05
+    - [ ] **T-234.1** Set up Next.js App Router structure for authenticated areas.
+    - [ ] **T-234.2** Implement route protection to ensure only authenticated users can access dashboard sections.
 {{ ... }}
 
 2. **Backend**
-   - [x] Set up Prisma with PostgreSQL
-   - [x] Implement user profile API endpoints
-   - [ ] Create document storage service
+   - [x] **T-310** Set up Database (SQLAlchemy, Alembic, PostgreSQL) & Initial Migration ✅
+   - [x] **T-401** Implement User Profile Management API (FastAPI, CRUD, Pydantic Schemas) ✅
+   - [x] **T-405** Implement JWT Authentication (login/token API, /users/me) ✅
+- [x] Configure Pydantic settings for environment variables ✅
+- [x] Fix: Resolve CORS issues for frontend-backend communication ✅
+- [x] Fix: Pin bcrypt==4.0.1 for passlib==1.7.4 compatibility ✅
+- [x] Chore: Full backend codebase linting and formatting (flake8, black, isort) ✅
+- [ ] Create document storage service
 
 3. **AI/ML**
    - [ ] Research Gemini API integration
@@ -1019,7 +1039,7 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 | Phase | Frontend | Backend | AI/ML | DevOps | Security | UX/UI |
 |-------|----------|---------|-------|--------|----------|------|
-| 1 - MVP | 29%      | 36%     | 0%    | 9%     | 9%       | 14%   |
+| 1 - MVP | 29%      | 88%     | 0%    | 9%     | 9%       | 14%   |
 | 2 - Expansion | 0%       | 0%      | 0%    | 0%     | 0%       | 0%    |
 | 3 - Full Suite| 0%       | 0%      | 0%    | 0%     | 0%       | 0%    |
 

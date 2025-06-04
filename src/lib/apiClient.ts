@@ -14,7 +14,7 @@ apiClient.interceptors.request.use(
       // Try to get token from cookies first
       const cookieToken = document.cookie
         .split('; ')
-        .find(row => row.startsWith('auth_token='))
+        .find((row) => row.startsWith('auth_token='))
         ?.split('=')[1];
 
       if (cookieToken) {

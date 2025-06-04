@@ -91,7 +91,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const clearAuthCookie = useCallback(() => {
-    document.cookie = 'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure';
+    document.cookie =
+      'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax; Secure';
   }, []);
 
   const fetchCurrentUser = useCallback(async (): Promise<User | null> => {
@@ -171,7 +172,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } else {
         throw new Error('Failed to fetch user details after login.');
       }
-
     } catch (error: unknown) {
       console.error('Login failed:', error);
       clearAuthCookie();
@@ -212,22 +212,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const register = async (name: string, email: string, password: string): Promise<void> => {
-    toast({ title: 'Info', description: 'Register function not implemented yet.'});
+    toast({ title: 'Info', description: 'Register function not implemented yet.' });
     console.warn('Register function not implemented yet.', { name, email, password });
   };
 
   const forgotPassword = async (email: string): Promise<void> => {
-    toast({ title: 'Info', description: 'Forgot Password function not implemented yet.'});
+    toast({ title: 'Info', description: 'Forgot Password function not implemented yet.' });
     console.warn('Forgot Password function not implemented yet.', { email });
   };
 
   const resetPassword = async (token: string, email: string): Promise<void> => {
-    toast({ title: 'Info', description: 'Reset Password function not implemented yet.'});
+    toast({ title: 'Info', description: 'Reset Password function not implemented yet.' });
     console.warn('Reset Password function not implemented yet.', { token, email });
   };
 
   const verifyEmail = async (token: string): Promise<boolean> => {
-    toast({ title: 'Info', description: 'Verify Email function not implemented yet.'});
+    toast({ title: 'Info', description: 'Verify Email function not implemented yet.' });
     console.warn('Verify Email function not implemented yet.', { token });
     return false;
   };
@@ -240,13 +240,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const updateProfile = async (updates: Partial<User>): Promise<User | null> => {
-    toast({ title: 'Info', description: 'Update Profile function not implemented yet.'});
+    toast({ title: 'Info', description: 'Update Profile function not implemented yet.' });
     console.warn('Update Profile function not implemented yet.', { updates });
     return null;
   };
 
   const changePassword = async (currentPassword: string, newPassword: string): Promise<void> => {
-    toast({ title: 'Info', description: 'Change Password function not implemented yet.'});
+    toast({ title: 'Info', description: 'Change Password function not implemented yet.' });
     console.warn('Change Password function not implemented yet.', { currentPassword, newPassword });
   };
 

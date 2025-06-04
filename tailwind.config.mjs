@@ -1,7 +1,7 @@
-import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
 
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+export default {
   darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -67,8 +67,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'], // Set Inter as primary sans-serif
-        mono: ['var(--font-geist-mono)', 'monospace'], // Keep Geist Mono or update if needed
+        sans: ['var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -83,10 +83,6 @@ const config: Config = {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -108,12 +104,12 @@ const config: Config = {
         brand: {
           green: {
             light: '#94EA6C',
-            DEFAULT: '#70C945', // A mid-point, can be used if only one green is needed
+            DEFAULT: '#70C945',
             dark: '#60B83A',
           },
         },
         formInput: {
-          bg: 'hsl(var(--form-input-bg, var(--card)))', // Fallback to --card if --form-input-bg is not defined
+          bg: 'hsl(var(--form-input-bg, var(--card)))',
           border: 'hsl(var(--form-input-border, var(--border)))',
           placeholder: 'hsl(var(--form-input-placeholder, var(--muted-foreground)))',
           text: 'hsl(var(--form-input-text, var(--card-foreground)))',
@@ -123,10 +119,10 @@ const config: Config = {
           hover: '#1D4ED8',
         },
         figmaText: {
-          heading: 'hsl(var(--text-heading, var(--foreground)))', // Fallback to --foreground
-          subheading: 'hsl(var(--text-subheading, var(--muted-foreground)))', // Fallback to --muted-foreground
+          heading: 'hsl(var(--text-heading, var(--foreground)))',
+          subheading: 'hsl(var(--text-subheading, var(--muted-foreground)))',
           label: 'hsl(var(--text-label, var(--foreground)))',
-          DEFAULT: 'hsl(var(--text-body, var(--foreground)))', // Default body text
+          DEFAULT: 'hsl(var(--text-body, var(--foreground)))',
         },
         googleButton: {
           border: 'hsl(var(--google-button-border, var(--border)))',
@@ -157,5 +153,3 @@ const config: Config = {
   },
   plugins: [animate],
 };
-
-export default config;
