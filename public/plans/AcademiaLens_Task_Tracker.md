@@ -942,7 +942,8 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 ### Component Registry
 
-### Frontend Components
+#### Frontend Components
+- [✅] T-FE-SB-001: Configure and troubleshoot Storybook for component development (Owner: User/Cascade)
 
 #### Authentication
 - [ ] `AuthForm` - Handles login/signup forms (Owner: FE4)
@@ -1039,11 +1040,18 @@ This document serves as a centralized task tracker for the AcademiaLens project,
 
 | Phase | Frontend | Backend | AI/ML | DevOps | Security | UX/UI |
 |-------|----------|---------|-------|--------|----------|------|
-| 1 - MVP | 29%      | 88%     | 0%    | 9%     | 9%       | 14%   |
+| 1 - MVP | 39%      | 88%     | 0%    | 9%     | 9%       | 14%   |
 | 2 - Expansion | 0%       | 0%      | 0%    | 0%     | 0%       | 0%    |
 | 3 - Full Suite| 0%       | 0%      | 0%    | 0%     | 0%       | 0%    |
 
 ## Notes
+- ✅ **CSS/Tailwind Fix (2025-06-04):** Resolved critical CSS syntax errors and Tailwind `text-destructive` build issues in `globals.css`, unblocking frontend development. (Cascade/USER)
+- 🔄 **Dashboard Styling:** Implement auth-inspired styling (cards, buttons, colors, header/footer) on Dashboard pages. Target: 2025-06-07. (Cascade/USER)
+  - ✅ **Dashboard Layout (`dashboard/layout.tsx`):** Applied theme-consistent colors and styles to the main dashboard layout, sidebars, navigation, and user profile elements. (2025-06-05, Cascade/USER)
+  - 🔄 **Dashboard Content Pages:** Style content areas with auth-inspired cards, buttons, and theme colors.
+    - ✅ **Main Dashboard (`/dashboard/page.tsx`):** Applied card styling and themed text. (2025-06-05, Cascade/USER)
+    - ✅ **Settings Page (`/dashboard/settings/page.tsx` and forms):** Applied themed text and styles to settings page and its forms (`UpdateProfileForm`, `ChangePasswordForm`, `NotificationPreferencesForm`). (2025-06-05, Cascade/USER)
+    - ⏳ **Other Dashboard Pages (e.g., Profile, specific feature pages):** Review and apply consistent styling.
 - Update progress percentages as tasks are completed
 - Add specific task owners and due dates in team settings
 - Use the legend to mark task status

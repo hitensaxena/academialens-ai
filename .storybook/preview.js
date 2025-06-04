@@ -1,3 +1,4 @@
+import '../storybook.tailwind.css';
 export const parameters = {
   themes: {
     default: 'Light',

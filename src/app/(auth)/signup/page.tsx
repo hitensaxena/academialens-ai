@@ -76,59 +76,49 @@ export default function SignupPage() {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Title & Subtitle */}
-      <div className="mb-6">
-        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">
-          Create Your Account
-        </h1>
-        <p className="text-base text-center text-muted-foreground">
-          Provide us details to create a new account
-        </p>
+      <div className="auth-title-block">
+        <h1 className="auth-title">Create Your Account</h1>
+        <p className="auth-subtitle">Provide us details to create a new account</p>
       </div>
 
       {/* Card */}
-      <div className="w-full rounded-2xl bg-card text-card-foreground p-10 shadow-xl">
+      <div className="auth-card">
         <div className="w-full space-y-6">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
             {/* Full Name Input */}
             <div>
-              <Label htmlFor="name" className="block text-sm font-medium text-figmaText-label mb-2">
+              <Label htmlFor="name" className="auth-label">
                 Full Name
               </Label>
               <Input
                 id="name"
                 placeholder="Your Name"
-                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.name ? 'border-red-500' : ''}`}
+                className={`auth-input ${errors.name ? 'border-destructive' : ''}`}
                 {...register('name')}
                 disabled={isSubmitting}
               />
-              {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+              {errors.name && <p className="auth-input-error">{errors.name.message}</p>}
             </div>
 
             {/* Email Input */}
             <div>
-              <Label
-                htmlFor="email"
-                className="block text-sm font-medium text-figmaText-label mb-2"
-              >
+              <Label htmlFor="email" className="auth-label">
                 Email
               </Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="Your Email Address"
-                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
+                className={`auth-input ${errors.email ? 'border-destructive' : ''}`}
                 {...register('email')}
                 disabled={isSubmitting}
               />
-              {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
+              {errors.email && <p className="auth-input-error">{errors.email.message}</p>}
             </div>
 
             {/* Password Input */}
             <div>
-              <Label
-                htmlFor="password"
-                className="block text-sm font-medium text-figmaText-label mb-2"
-              >
+              <Label htmlFor="password" className="auth-label">
                 Password
               </Label>
               <div className="relative">
@@ -136,14 +126,14 @@ export default function SignupPage() {
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Create a new password"
-                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
+                  className={`auth-input ${errors.password ? 'border-destructive' : ''}`}
                   {...register('password')}
                   disabled={isSubmitting}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-500"
+                  className="auth-password-toggle-icon"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   disabled={isSubmitting}
                 >
@@ -154,17 +144,12 @@ export default function SignupPage() {
                   )}
                 </button>
               </div>
-              {errors.password && (
-                <p className="mt-1 text-xs text-red-600">{errors.password.message}</p>
-              )}
+              {errors.password && <p className="auth-input-error">{errors.password.message}</p>}
             </div>
 
             {/* Confirm Password Input */}
             <div>
-              <Label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-figmaText-label mb-2"
-              >
+              <Label htmlFor="confirmPassword" className="auth-label">
                 Confirm Password
               </Label>
               <div className="relative">
@@ -172,14 +157,14 @@ export default function SignupPage() {
                   id="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="Confirm password"
-                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.confirmPassword ? 'border-red-500' : ''}`}
+                  className={`auth-input ${errors.confirmPassword ? 'border-destructive' : ''}`}
                   {...register('confirmPassword')}
                   disabled={isSubmitting}
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-500"
+                  className="auth-password-toggle-icon"
                   aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                   disabled={isSubmitting}
                 >
@@ -191,7 +176,7 @@ export default function SignupPage() {
                 </button>
               </div>
               {errors.confirmPassword && (
-                <p className="mt-1 text-xs text-red-600">{errors.confirmPassword.message}</p>
+                <p className="auth-input-error">{errors.confirmPassword.message}</p>
               )}
             </div>
 
@@ -199,26 +184,20 @@ export default function SignupPage() {
             <div className="flex items-start space-x-2">
               <Checkbox
                 id="terms"
-                className="mt-0.5 h-4 w-4 rounded border-googleButton-border text-link-DEFAULT focus:ring-link-DEFAULT"
+                className="auth-checkbox"
                 {...register('terms')}
                 onCheckedChange={(checked) =>
                   setValue('terms', checked as boolean, { shouldValidate: true })
                 }
               />
               <div className="grid gap-1.5 leading-none">
-                <Label htmlFor="terms" className="text-sm font-normal text-figmaText-label">
+                <Label htmlFor="terms" className="auth-checkbox-label">
                   I agree to the{' '}
-                  <Link
-                    href="/terms"
-                    className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
-                  >
+                  <Link href="/terms" className="auth-link">
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link
-                    href="/privacy"
-                    className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
-                  >
+                  <Link href="/privacy" className="auth-link">
                     Privacy Policy
                   </Link>
                 </Label>
@@ -228,24 +207,17 @@ export default function SignupPage() {
 
             {/* Sign Up Button */}
             <div className="mt-2">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-12 flex items-center justify-center rounded-md bg-gradient-to-r from-brand-green-light to-brand-green-dark px-4 text-sm font-semibold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-green-dark focus:ring-offset-2 disabled:opacity-50 transition-opacity"
-              >
-                {isSubmitting ? <Icons.loader className="mr-2 h-4 w-4 animate-spin" /> : null}
+              <Button type="submit" disabled={isSubmitting} className="auth-primary-button">
+                {isSubmitting ? <Icons.loader className="auth-primary-button-icon" /> : null}
                 Sign Up
               </Button>
             </div>
           </form>
 
           {/* Login Link */}
-          <div className="text-center text-sm text-figmaText-subheading mt-2">
+          <div className="auth-footer-link-group">
             Already Have An Account?{' '}
-            <Link
-              href="/login"
-              className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
-            >
+            <Link href="/login" className="auth-link">
               Login Now
             </Link>
           </div>

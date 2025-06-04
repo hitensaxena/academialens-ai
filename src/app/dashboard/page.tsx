@@ -25,15 +25,23 @@ export default function DashboardPage() {
   }, [isAuthenticated, user, isLoading]);
 
   if (isLoading) {
-    return <div>Loading dashboard...</div>;
+    return (
+      <div className="flex min-h-[calc(100vh-theme(spacing.32))] items-center justify-center p-8 text-foreground">
+        Loading dashboard...
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
-    return <div>Not authenticated. Redirecting to login...</div>;
+    return (
+      <div className="flex min-h-[calc(100vh-theme(spacing.32))] items-center justify-center p-8 text-destructive">
+        Not authenticated. Redirecting to login...
+      </div>
+    );
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8 bg-card text-card-foreground rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <p>Welcome to your dashboard, {user?.name || 'User'}!</p>
     </div>

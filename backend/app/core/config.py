@@ -19,18 +19,19 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: str = "INFO"
 
-    # CORS - Accept string format from .env
-    BACKEND_CORS_ORIGINS: List[str] = []
+    # CORS - Accept string format from .env, validator will convert to List[str]
+    BACKEND_CORS_ORIGINS: str = ""
 
-    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
+    @field_validator("BACKEND_CORS_ORIGINS", mode="after")  # Changed mode to "after"
     @classmethod
-    def parse_cors_origins(cls, v) -> List[str]:
+    def parse_cors_origins(cls, v: str) -> List[str]:  # Validator now receives a str
         if isinstance(v, str):
             # Handle comma-separated string
             return [origin.strip() for origin in v.split(",") if origin.strip()]
-        if isinstance(v, list):
-            return v
-        return []
+        # v is guaranteed to be a string here due to "after" mode and field type hint
+        if isinstance(v, str):  # Still good to keep the check for robustness
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return []  # Should not be reached if input is always from .env as string
 
     # Database
     POSTGRES_SERVER: str

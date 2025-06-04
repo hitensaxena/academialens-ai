@@ -30,7 +30,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             priority
           />
           {/* Overlay for text readability */}
-          <div className="absolute inset-0 bg-black/25"></div> {/* Figma: 27% black overlay */}
+          <div className="absolute inset-0 bg-[var(--auth-image-overlay)]"></div>{' '}
+          {/* Figma: 27% black overlay, now using CSS variable */}
           <div className="relative z-10">
             <Link href="/" className="flex items-center gap-3">
               <Icons.logo className="h-9 w-9 text-white" />
@@ -51,9 +52,9 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         </div>
 
         {/* Right Panel (Form Area) */}
-        <div className="min-h-screen flex flex-col items-center pt-16 md:pt-24 px-4 bg-background overflow-y-auto w-full flex-1 p-6 md:p-8 lg:p-12">
+        <div className="auth-page-container">
           {/* This div will contain the title block AND the card from page.tsx */}
-          <div className="flex flex-col items-center justify-start w-full max-w-lg">
+          <div className="auth-content-wrapper">
             {children} {/* This is where login/signup page content (title + card) will go */}
           </div>
           {/* TermsLinks will appear below the content rendered by {children} */}

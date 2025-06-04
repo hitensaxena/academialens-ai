@@ -111,6 +111,11 @@ const config: Config = {
             DEFAULT: '#70C945', // A mid-point, can be used if only one green is needed
             dark: '#60B83A',
           },
+          purple: {
+            light: '#A78BFA',
+            DEFAULT: '#8B5CF6',
+            dark: '#7C3AED',
+          },
         },
         formInput: {
           bg: 'hsl(var(--form-input-bg, var(--card)))', // Fallback to --card if --form-input-bg is not defined

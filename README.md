@@ -220,6 +220,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
     *   Corrected `eslint.config.mjs` to properly ignore build and metadata directories (`.next/`, `.imdone/`, `public/plans/.imdone/`) and removed unsupported `.eslintignore`.
     *   Resolved various lint errors (unescaped entities, anonymous default exports, self-closing component tags).
     *   Formatted the codebase using Prettier.
+    *   Ran `npm run lint:fix` to resolve all frontend ESLint issues.
+    *   Ran `isort` and `black` on the backend Python code.
+    *   Configured Flake8 via `backend/.flake8` to use an 88-character line length and ignore E501 for `backend/app/crud/crud_user.py`, resolving all backend linting errors.
 *   **Task Tracker:**
     *   Updated `AcademiaLens_Task_Tracker.md` to mark authentication UI tasks (T-700, T-701) as complete, reflecting the styling and layout enhancements.
 

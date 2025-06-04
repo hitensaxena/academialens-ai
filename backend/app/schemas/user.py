@@ -23,6 +23,12 @@ class UserUpdate(UserBase):
     password: Optional[str] = Field(default=None, min_length=8)  # Allow pw update
 
 
+# Schema for changing user password
+class UserPasswordChange(BaseModel):
+    current_password: str
+    new_password: str = Field(..., min_length=8)
+
+
 # Properties stored in DB (not always returned to client)
 class UserInDBBase(UserBase):
     id: int

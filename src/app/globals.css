@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 220 90% 56%;
+  --primary-foreground: 0 0% 100%;
+  --background: 0 0% 100%; /* Main background */
+  --foreground: 222.2 84% 4.9%; /* Main text color */
+  
+  --card: 0 0% 100%; /* Card background */
+  --card-foreground: 222.2 84% 4.9%; /* Text on card */
+  
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%; /* Text on destructive background */
+  
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%; /* Muted text, like placeholders or secondary info */
+  
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 47.4% 11.2%; /* For highlighted elements, hover states */
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  
+  --border: 214.3 31.8% 91.4%; /* Default border color */
+  --input: 214.3 31.8% 91.4%; /* Input field border */
+  --ring: 220 90% 56%; /* Focus ring color (often same as primary) */
+
+  --radius: 0.5rem; /* Default border radius for cards, inputs, buttons */
+
+  /* Custom AcademiaLens Auth Colors */
+  --brand-green-light: #94EA6C;
+  --brand-green-dark: #60B83A;
+  
+  --link-default: hsl(var(--primary));
+  --link-hover: hsl(var(--primary) / 0.8); /* Or a specific lighter shade like 220 90% 66% */
+  
+  --figma-text-label: hsl(var(--foreground));
+  --figma-text-subheading: hsl(var(--muted-foreground));
+  
+  --google-button-border-color: hsl(var(--border));
+  --google-button-text-color: hsl(var(--foreground));
+  --google-button-bg-hover: hsl(var(--accent));
+
+  /* Semantic variables for auth layout */
+  --auth-image-overlay: rgba(0, 0, 0, 0.25); /* From AuthLayout.tsx bg-black/25 */
+  --brand-purple-light: #A78BFA;
+  --brand-purple-dark: #7C3AED;
+}
+
+/* .dark { */
+
+  
+/*    --auth-image-overlay: rgba(0, 0, 0, 0.35); */
+/* } */
+
+@layer base {
+  * {
+    @apply border-border; /* Apply default border color */
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+/* Auth Page Specific Component Styles */
+
+.auth-dialog-title {
+    @apply text-2xl font-semibold text-center text-foreground;
+  }
+
+  .auth-dialog-description {
+    @apply text-sm text-center text-muted-foreground mt-1;
+  }
+
+  /* Auth Page Specific Component Styles */
+  .auth-page-container { /* For the right panel in AuthLayout */
+    @apply min-h-screen flex flex-col items-center pt-16 md:pt-24 px-4 bg-background overflow-y-auto w-full flex-1 p-6 md:p-8 lg:p-12;
+  }
+
+  .auth-content-wrapper { /* For the immediate child of {children} in AuthLayout */
+    @apply flex flex-col items-center justify-start w-full max-w-lg;
+  }
+  
+  .auth-title-block {
+    @apply text-center mb-8; /* Added margin-bottom */
+  }
+
+  .auth-title {
+    @apply text-3xl font-bold tracking-tight text-foreground sm:text-4xl;
+  }
+
+  .auth-subtitle {
+    @apply mt-2 text-base text-muted-foreground;
+  }
+
+  .auth-card {
+    @apply w-full bg-card p-6 sm:p-8 shadow-xl rounded-lg border; /* Standardized padding, max-width handled by auth-content-wrapper or specific page */
+  }
+
+  .auth-form {
+    @apply space-y-6;
+  }
+
+  .auth-label {
+    @apply block text-sm font-medium leading-6 text-foreground; /* Default label */
+  }
+  
+  .auth-checkbox-label {
+    @apply ml-2 block text-sm font-medium;
+    color: var(--figma-text-label); /* Using the CSS variable */
+  }
+
+  .auth-input-error {
+    @apply mt-1 text-xs; /* Keep other utilities */
+    color: hsl(var(--destructive)); /* Apply color directly */
+  }
+
+  .auth-password-toggle-icon {
+    @apply absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground;
+  }
+
+  .auth-primary-button {
+    @apply w-full h-12 flex items-center justify-center rounded-md px-4 text-sm font-semibold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 transition-opacity;
+    background-image: linear-gradient(to right, var(--brand-green-light), var(--brand-green-dark));
+    /* For focus ring, ensure --brand-green-dark is usable with focus:ring-[color] or define a custom ring */
+    @apply focus:ring-[var(--brand-green-dark)];
+  }
+  
+  .auth-primary-button-icon { /* For loader icon inside button */
+     @apply mr-2 h-4 w-4 animate-spin;
+  }
+
+  .auth-accent-button {
+    @apply w-full h-11 flex items-center justify-center rounded-md px-4 text-sm font-semibold text-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 transition-opacity;
+    background-image: linear-gradient(to right, var(--brand-purple-light), var(--brand-purple-dark));
+    /* Ensure text color is appropriate for the gradient */
+    color: white; /* Explicitly set for contrast */
+    /* Focus ring color should match the button's theme */
+    @apply focus:ring-[var(--brand-purple-dark)]; 
+  }
+  .auth-accent-button:hover {
+    @apply opacity-90;
+  }
+  .auth-accent-button-icon { /* If an icon is used with this button */
+    @apply mr-2 h-4 w-4 animate-spin;
+  }
+
+  .auth-secondary-button { /* For Google/Social Button */
+    @apply w-full h-12 flex items-center justify-center rounded-md border bg-card px-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors;
+    border-color: var(--google-button-border-color);
+    color: var(--google-button-text-color);
+  }
+  .auth-secondary-button:hover {
+    background-color: var(--google-button-bg-hover);
+  }
+  .auth-secondary-button:focus { /* Assuming ring should be primary, adjust if needed */
+    @apply ring-[var(--ring)]; 
+  }
+  .auth-secondary-button-icon { /* For Google icon */
+     @apply mr-2 h-5 w-5;
+  }
+
+  .auth-divider {
+    @apply relative mt-6 mb-6; /* Added margin */
+  }
+  .auth-divider-line {
+    @apply absolute inset-0 flex items-center;
+  }
+  .auth-divider-line > div {
+    @apply w-full border-t border-border; /* Mapped formInput-border to border */
+  }
+  .auth-divider-text-wrapper {
+    @apply relative flex justify-center text-xs;
+  }
+  .auth-divider-text {
+    @apply bg-card px-2; /* Mapped formInput-bg to card */
+    color: var(--figma-text-subheading);
+  }
+
+  .auth-link {
+    @apply font-medium hover:underline;
+    color: var(--link-default);
+  }
+  .auth-link:hover {
+    color: var(--link-hover);
+  }
+  
+  .auth-footer-link-group { /* For terms links / create account links */
+      @apply text-center text-sm;
+      color: var(--figma-text-subheading); /* Base color for the text around the link */
+  }
+}
+
+
+

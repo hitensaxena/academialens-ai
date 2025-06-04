@@ -48,21 +48,16 @@ export function InfoDialog({
               <Image src={iconSrc} alt="Dialog Icon" layout="fill" objectFit="contain" />
             </div>
           )}
-          <DialogTitle className="text-2xl font-semibold text-figmaText-heading">
-            {title}
-          </DialogTitle>
+          <DialogTitle className="auth-dialog-title">{title}</DialogTitle>
           {description && (
-            <DialogDescription className="text-sm text-figmaText-subheading mt-2 whitespace-pre-line">
+            <DialogDescription className="auth-dialog-description whitespace-pre-line">
               {description}
             </DialogDescription>
           )}
         </DialogHeader>
 
         {actionLabel && (
-          <Button
-            onClick={handleAction}
-            className="w-full h-11 mt-4 rounded-md bg-gradient-to-r from-brand-purple-light to-brand-purple-dark px-4 text-sm font-semibold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-purple-dark focus:ring-offset-2 transition-opacity"
-          >
+          <Button onClick={handleAction} className="auth-accent-button mt-4">
             {actionLabel}
           </Button>
         )}

@@ -114,11 +114,11 @@ function ResetPasswordForm() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center p-4">
         <div className="w-full max-w-md space-y-4 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Invalid or Expired Link</h1>
-          <p className="text-muted-foreground">
+          <h1 className="auth-dialog-title tracking-tight">Invalid or Expired Link</h1>
+          <p className="auth-dialog-description">
             The password reset link is invalid or has expired. Please request a new one.
           </p>
-          <Button asChild className="mt-4">
+          <Button asChild className="auth-primary-button mt-4">
             <Link href="/forgot-password">Request New Link</Link>
           </Button>
         </div>
@@ -128,31 +128,31 @@ function ResetPasswordForm() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">
-          Reset Password
-        </h1>
-        <p className="text-lg text-center text-muted-foreground">Enter your new password below</p>
+      <div className="auth-title-block">
+        <h1 className="auth-title">Reset Password</h1>
+        <p className="auth-subtitle">Enter your new password below</p>
       </div>
-      <div className="w-full max-w-md rounded-2xl bg-card text-card-foreground p-8 shadow-xl">
+      <div className="auth-card">
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="password">New Password</Label>
+                <Label htmlFor="password" className="auth-label">
+                  New Password
+                </Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="••••••••"
-                    className="h-12 pr-10"
+                    className="auth-input pr-10"
                     {...register('password')}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    className="auth-password-toggle-icon"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -162,25 +162,25 @@ function ResetPasswordForm() {
                     )}
                   </Button>
                 </div>
-                {errors.password && (
-                  <p className="text-sm text-red-500">{errors.password.message}</p>
-                )}
+                {errors.password && <p className="auth-input-error">{errors.password.message}</p>}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Label htmlFor="confirmPassword" className="auth-label">
+                  Confirm Password
+                </Label>
                 <div className="relative">
                   <Input
                     id="confirmPassword"
                     type={showConfirmPassword ? 'text' : 'password'}
                     placeholder="••••••••"
-                    className="h-12 pr-10"
+                    className="auth-input pr-10"
                     {...register('confirmPassword')}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                    className="auth-password-toggle-icon"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
@@ -191,17 +191,13 @@ function ResetPasswordForm() {
                   </Button>
                 </div>
                 {errors.confirmPassword && (
-                  <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
+                  <p className="auth-input-error">{errors.confirmPassword.message}</p>
                 )}
               </div>
-              <Button
-                type="submit"
-                className="w-full bg-primary-accent hover:bg-primary-accent/90 h-12 text-white"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" className="auth-primary-button" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <>
-                    <Icons.loader className="mr-2 h-4 w-4 animate-spin" /> Resetting...
+                    <Icons.loader className="auth-primary-button-icon" /> Resetting...
                   </>
                 ) : (
                   'Reset Password'
@@ -211,9 +207,9 @@ function ResetPasswordForm() {
           </form>
         </div>
       </div>
-      <p className="mt-8 text-center text-sm text-muted-foreground">
+      <p className="auth-footer-link-group">
         Remember your password?{' '}
-        <Link href="/login" className="font-medium text-primary-accent hover:underline">
+        <Link href="/login" className="auth-link">
           Sign in
         </Link>
       </p>

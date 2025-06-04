@@ -94,7 +94,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-background text-foreground">
       {/* Mobile sidebar */}
       <div className={cn('fixed inset-0 z-40 lg:hidden', sidebarOpen ? 'block' : 'hidden')}>
         <div
@@ -102,8 +102,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           aria-hidden="true"
           onClick={() => setSidebarOpen(false)}
         />
-        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white">
-          <div className="flex h-16 flex-shrink-0 items-center justify-between px-4 bg-indigo-600">
+        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-card">
+          <div className="flex h-16 flex-shrink-0 items-center justify-between px-4 bg-primary">
             <h1 className="text-xl font-bold text-white">AcademiaLens</h1>
             <button
               type="button"
@@ -124,7 +124,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     href={item.href}
                     className={cn(
                       isActive
-                        ? 'bg-indigo-50 text-indigo-700'
+                        ? 'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
@@ -132,7 +132,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   >
                     <item.icon
                       className={cn(
-                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+                        isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 h-6 w-6 flex-shrink-0'
                       )}
                       aria-hidden="true"
@@ -144,7 +144,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </nav>
             <div className="mt-auto p-4">
               <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 font-semibold">
+                <div className="h-10 w-10 rounded-full bg-primary/20 text-primary dark:bg-primary-foreground dark:text-primary font-semibold flex items-center justify-center">
                   {getUserInitials()}
                 </div>
                 <div className="ml-3">
@@ -163,13 +163,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
-          <div className="flex h-16 flex-shrink-0 items-center justify-between px-4 bg-indigo-600">
+        <div className="flex min-h-0 flex-1 flex-col border-r border-border bg-card">
+          <div className="flex h-16 flex-shrink-0 items-center justify-between px-4 bg-primary">
             <h1 className="text-xl font-bold text-white">AcademiaLens</h1>
             <div className="relative profile-dropdown">
               <button
                 type="button"
-                className="flex items-center rounded-full bg-white/10 p-1 text-sm text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                className="flex items-center rounded-full bg-white/10 p-1 text-sm text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
               >
                 <span className="sr-only">Open user menu</span>
@@ -208,14 +208,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     href={item.href}
                     className={cn(
                       isActive
-                        ? 'bg-indigo-50 text-indigo-700'
+                        ? 'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                     )}
                   >
                     <item.icon
                       className={cn(
-                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+                        isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 h-6 w-6 flex-shrink-0'
                       )}
                       aria-hidden="true"
@@ -228,7 +228,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
             <div className="mt-auto p-4">
               <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-600 font-semibold">
+                <div className="h-10 w-10 rounded-full bg-primary/20 text-primary dark:bg-primary-foreground dark:text-primary font-semibold flex items-center justify-center">
                   {getUserInitials()}
                 </div>
                 <div className="ml-3">
@@ -243,7 +243,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Main content */}
       <div className="flex flex-1 flex-col lg:pl-64">
-        <div className="sticky top-0 z-10 bg-white shadow-sm lg:hidden">
+        <div className="sticky top-0 z-10 bg-card shadow-sm border-b border-border lg:hidden">
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
             <button
               type="button"

@@ -105,25 +105,21 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      {/* Title & Subtitle */}
-      <div className="mb-6">
-        <h1 className="text-4xl font-bold text-center text-figmaText-heading mb-2">Welcome Back</h1>
-        <p className="text-base text-center text-muted-foreground">Login to your account below</p>
+    <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {/* Title Block */}
+      <div className="auth-title-block">
+        <h1 className="auth-title">Welcome Back to AcademiaLens</h1>
+        <p className="auth-subtitle">Log in to access your research dashboard and tools.</p>
       </div>
-
-      {/* Card */}
-      <div className="w-full rounded-2xl bg-card text-card-foreground p-10 shadow-xl">
-        <div className="w-full space-y-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Input */}
-            <div>
-              <Label
-                htmlFor="email"
-                className="block text-sm font-medium text-figmaText-label mb-2"
-              >
-                Email
-              </Label>
+      {/* Card for the form */}
+      <div className="mt-10 auth-card">
+        <form className="auth-form" onSubmit={handleSubmit}>
+          {/* Email Input */}
+          <div>
+            <Label htmlFor="email" className="auth-label">
+              Email address
+            </Label>
+            <div className="mt-2">
               <Input
                 id="email"
                 name="email"
@@ -132,121 +128,105 @@ function LoginForm() {
                 placeholder="Your Email Address"
                 value={email}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.email ? 'border-red-500' : ''}`}
+                className={`auth-input ${errors.email ? 'border-destructive' : ''}`}
               />
-              {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+              {errors.email && <p className="auth-input-error">{errors.email}</p>}
             </div>
-
-            {/* Password Input */}
-            <div>
-              <div className="flex items-center justify-between">
-                <Label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-figmaText-label"
-                >
-                  Password
-                </Label>
-                <button
-                  type="button"
-                  onClick={() => setIsForgotPasswordOpen(true)}
-                  className="text-xs font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
-                >
-                  Forgot Password?
-                </button>
-              </div>
-              <div className="relative">
-                <Input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
-                  placeholder="Your Password"
-                  value={password}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                  className={`w-full px-3 h-12 rounded-md bg-formInput-bg border border-formInput-border text-formInput-text placeholder-formInput-placeholder focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm ${errors.password ? 'border-red-500' : ''}`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-500"
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? (
-                    <Icons.eyeOff className="h-5 w-5" />
-                  ) : (
-                    <Icons.eye className="h-5 w-5" />
-                  )}
-                </button>
-              </div>
-              {errors.password && <p className="mt-1 text-xs text-red-600">{errors.password}</p>}
-            </div>
-
-            {/* Remember Me Checkbox */}
-            <div className="flex items-center">
-              <Checkbox
-                id="remember"
-                checked={rememberMe}
-                onCheckedChange={(checked: boolean) => setRememberMe(checked)}
-                className="h-4 w-4 rounded border-googleButton-border text-link-DEFAULT focus:ring-link-DEFAULT"
-              />
-              <Label
-                htmlFor="remember"
-                className="ml-2 block text-sm font-medium text-figmaText-label"
-              >
-                Remember me
+          </div>{' '}
+          {/* Closes the main div for Email Input section */}
+          {/* Password Input */}
+          <div>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password" className="auth-label">
+                Password
               </Label>
-            </div>
-
-            {/* Log In Button */}
-            <div className="mt-2">
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-12 flex items-center justify-center rounded-md bg-gradient-to-r from-brand-green-light to-brand-green-dark px-4 text-sm font-semibold text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand-green-dark focus:ring-offset-2 disabled:opacity-50 transition-opacity"
+              <button
+                type="button"
+                onClick={() => setIsForgotPasswordOpen(true)}
+                className="text-xs auth-link"
               >
-                {isLoading ? <Icons.loader className="mr-2 h-4 w-4 animate-spin" /> : null}
-                Log In
-              </Button>
+                Forgot Password?
+              </button>
             </div>
-          </form>
-
-          {/* Or continue with Divider */}
-          <div className="relative mt-2">
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-formInput-border" />
+            <div className="mt-2 relative">
+              <Input
+                id="password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                placeholder="Your Password"
+                value={password}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                className={`auth-input ${errors.password ? 'border-destructive' : ''}`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="auth-password-toggle-icon"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? (
+                  <Icons.eyeOff className="h-5 w-5" />
+                ) : (
+                  <Icons.eye className="h-5 w-5" />
+                )}
+              </button>
             </div>
-            <div className="relative flex justify-center text-xs">
-              <span className="bg-formInput-bg px-2 text-figmaText-subheading">
-                Or continue with
-              </span>
-            </div>
+            {errors.password && <p className="auth-input-error">{errors.password}</p>}
           </div>
-
-          {/* Google Button */}
+          {/* Remember Me Checkbox */}
+          <div className="flex items-center">
+            <Checkbox
+              id="remember"
+              checked={rememberMe}
+              onCheckedChange={(checked: boolean) => setRememberMe(checked)}
+              className="h-4 w-4 rounded border-border text-primary focus:ring-ring"
+            />
+            <Label htmlFor="remember" className="auth-checkbox-label">
+              Remember me
+            </Label>
+          </div>
+          {/* Log In Button */}
           <div className="mt-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => handleSocialLogin('Google')}
-              className="w-full h-12 flex items-center justify-center rounded-md border border-googleButton-border bg-white px-4 text-sm font-medium text-googleButton-text hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
-            >
-              <Icons.google className="mr-2 h-5 w-5" />
-              Google
+            <Button type="submit" disabled={isLoading} className="auth-primary-button">
+              {isLoading ? <Icons.loader className="auth-primary-button-icon" /> : null}
+              Log In
             </Button>
           </div>
+        </form>
 
-          {/* Create Account Link */}
-          <div className="text-center text-sm text-figmaText-subheading mt-2">
-            Don&apos;t have an account?{' '}
-            <Link
-              href="/signup"
-              className="font-medium text-link-DEFAULT hover:text-link-hover hover:underline"
-            >
-              Create An Account
-            </Link>
+        {/* Or continue with Divider */}
+        <div className="auth-divider">
+          <div className="auth-divider-line" aria-hidden="true">
+            <div />
+          </div>
+          <div className="auth-divider-text-wrapper">
+            <span className="auth-divider-text">Or continue with</span>
           </div>
         </div>
-      </div>
+
+        {/* Google Button */}
+        <div className="mt-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => handleSocialLogin('Google')}
+            className="auth-secondary-button"
+          >
+            <Icons.google className="auth-secondary-button-icon" />
+            Google
+          </Button>
+        </div>
+
+        {/* Create Account Link */}
+        <div className="auth-footer-link-group mt-6">
+          Don&apos;t have an account?{' '}
+          <Link href="/signup" className="auth-link">
+            Create An Account
+          </Link>
+        </div>
+      </div>{' '}
+      {/* Closes auth-card div */}
       <ForgotPasswordDialog
         open={isForgotPasswordOpen}
         onOpenChange={setIsForgotPasswordOpen}
@@ -260,7 +240,7 @@ function LoginForm() {
         iconSrc={infoDialogContent.iconSrc}
         actionLabel={infoDialogContent.actionLabel}
       />
-    </div>
+    </div> // Closes main wrapping div for LoginForm
   );
 }
 

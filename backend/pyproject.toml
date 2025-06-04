@@ -47,6 +47,13 @@ include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
 
+[tool.flake8]
+max-line-length = 88
+ignore = E203,W503
+per-file-ignores = [
+    "app/crud/crud_user.py:E501"
+]
+
 [tool.mypy]
 python_version = "3.10"
 warn_return_any = true

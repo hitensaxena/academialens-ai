@@ -1,7 +1,15 @@
 # This file makes the 'schemas' directory a Python package.
 # You can import schemas from here, e.g.:
 from .token import Token, TokenPayload
-from .user import User, UserBase, UserCreate, UserInDB, UserInDBBase, UserUpdate
+from .user import (
+    User,
+    UserBase,
+    UserCreate,
+    UserInDB,
+    UserInDBBase,
+    UserPasswordChange,
+    UserUpdate,
+)
 
 __all__ = [
     "Token",
@@ -12,4 +20,5 @@ __all__ = [
     "UserInDB",
     "UserInDBBase",
     "UserUpdate",
+    "UserPasswordChange",
 ]

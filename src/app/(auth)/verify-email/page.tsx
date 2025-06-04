@@ -60,11 +60,11 @@ function VerifyEmailContent() {
       ) : (
         <div className="w-full max-w-md space-y-6 rounded-lg border bg-card p-8 text-card-foreground shadow-sm">
           <div className="space-y-2 text-center">
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="auth-dialog-title tracking-tight">
               {status === 'verifying' && 'Verifying Your Email'}
               {status === 'error' && 'Verification Failed'}
             </h1>
-            <p className="text-sm text-muted-foreground">{message}</p>
+            <p className="auth-dialog-description">{message}</p>
           </div>
 
           {status === 'verifying' && (
@@ -75,7 +75,7 @@ function VerifyEmailContent() {
 
           {status === 'error' && (
             <div className="pt-4">
-              <Button className="w-full" asChild>
+              <Button className="auth-primary-button w-full" asChild>
                 <Link href="/signup">Back to Sign Up</Link>
               </Button>
             </div>

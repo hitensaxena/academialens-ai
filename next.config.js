@@ -19,7 +19,7 @@ const nextConfig = {
   },
 
   // Webpack configuration with Turbopack support
-  webpack: (config, { isServer }) => {
+  /* webpack: (config, { isServer }) => {
     // Add custom webpack configurations here
     if (!isServer) {
       // Configure client-side only modules
@@ -29,7 +29,7 @@ const nextConfig = {
       };
     }
     return config;
-  },
+  }, */
 
   // Environment variables
   env: {
@@ -37,9 +37,10 @@ const nextConfig = {
   },
 
   // Enable Turbopack
-  experimental: {
+  turbopack: {},
+  /* experimental: {
     turbo: {},
-  },
+  }, */
 };
 
 export default withBundleAnalyzerConfig(nextConfig);
